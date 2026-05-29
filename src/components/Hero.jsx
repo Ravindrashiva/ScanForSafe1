@@ -1390,7 +1390,7 @@ export default function ScanForSafeHero() {
               <button className="sfs-btn-sec">
                 <div className="sfs-play-ring">▶</div>
                 See How It Works
-              </a>
+              </button>
             </div>
             <div className="sfs-stats">
               <AnimatedStat num={10000} suffix="+" label="Assets Protected" />
