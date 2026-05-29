@@ -70,8 +70,8 @@ export default function Navbar() {
           align-items: center;
           justify-content: space-between;
           padding: 0 40px;
-          background: rgba(255,255,255,0.97);
-          backdrop-filter: blur(20px);
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(14px);
           border-bottom: 1px solid rgba(226,232,240,0.8);
           transition: height .35s ease, box-shadow .35s ease;
           box-shadow: 0 1px 0 rgba(0,0,0,0.04);
@@ -123,19 +123,19 @@ export default function Navbar() {
         }
 
         /* Dual pulse rings */
-        .sfs-pulse-ring {
-          position: absolute;
-          inset: -7px;
-          border-radius: 24px;
-          border: 1.5px solid rgba(34,197,94,0.35);
-          animation: sfs-pulse-out 2.8s ease-out infinite;
-          pointer-events: none;
-        }
-        .sfs-pulse-ring:nth-child(2) {
-          animation-delay: 1s;
-          inset: -14px;
-          border-radius: 29px;
-        }
+        // .sfs-pulse-ring {
+        //   position: absolute;
+        //   inset: -7px;
+        //   border-radius: 24px;
+        //   border: 1.5px solid rgba(34,197,94,0.35);
+        //   animation: sfs-pulse-out 2.8s ease-out infinite;
+        //   pointer-events: none;
+        // }
+        // .sfs-pulse-ring:nth-child(2) {
+        //   animation-delay: 1s;
+        //   inset: -14px;
+        //   border-radius: 29px;
+        // }
 
         @keyframes sfs-pulse-out {
           0%   { opacity: 0.75; transform: scale(0.9); }
@@ -170,10 +170,10 @@ export default function Navbar() {
           animation-duration: 1.4s;
         }
 
-        @keyframes sfs-spin-ring {
-          from { transform: rotate(0deg); }
-          to   { transform: rotate(360deg); }
-        }
+        // @keyframes sfs-spin-ring {
+        //   from { transform: rotate(100deg); }
+        //   to   { transform: rotate(360deg); }
+        // }
 
         /* White badge face */
         .sfs-badge-face {

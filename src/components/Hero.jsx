@@ -64,7 +64,7 @@ const ASSETS = [
 const css = `
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+.sfs-hero, .sfs-hero *, .sfs-hero *::before, .sfs-hero *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 
 :root {
@@ -246,7 +246,7 @@ html { scroll-behavior:smooth; }
 .sfs-feat:nth-child(3) { animation: fadeUp .55s .47s both; }
 
 /* ── Buttons ── */
-.sfs-actions {
+.sfs-hero-actions {
   display: flex; align-items: center; gap: 12px;
   margin-bottom: 24px;
   animation: fadeUp .55s .56s both;
@@ -682,7 +682,7 @@ html { scroll-behavior:smooth; }
   50%      { transform: translateY(-7px); }
 }
 .sfs-status-dot   { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: livePulse 1.8s infinite; flex-shrink: 0; }
-.sfs-status-label { font-size: 11px; font-weight: 800; color: var(--dark); }
+.sfs-hero-status-label { font-size: 11px; font-weight: 800; color: var(--dark); }
 .sfs-status-sub   { font-size: 8.5px; color: var(--mid); margin-top: 1px; }
 
 /* ══ TRANSITIONS ══ */
@@ -790,7 +790,7 @@ html { scroll-behavior:smooth; }
   .sfs-feat p  { font-size: 11px; }
 
   /* Buttons */
-  .sfs-actions { flex-direction: column; gap: 10px; margin-bottom: 20px; align-items: stretch; }
+  .sfs-hero-actions { flex-direction: column; gap: 10px; margin-bottom: 20px; align-items: stretch; }
   .sfs-btn-main { padding: 15px 20px; font-size: 14px; border-radius: 13px; justify-content: center; }
   .sfs-btn-sec  { padding: 14px 20px; font-size: 13.5px; border-radius: 13px; justify-content: center; }
 
@@ -854,7 +854,7 @@ html { scroll-behavior:smooth; }
 
   .sfs-status-pill { top: 52px; left: 4px; padding: 8px 12px; border-radius: 12px; transform: none; }
   .sfs-status-dot { width: 6px; height: 6px; }
-  .sfs-status-label { font-size: 10.5px; }
+  .sfs-hero-status-label { font-size: 10.5px; }
   .sfs-status-sub { font-size: 8.5px; }
 
   /* Ticker */
@@ -1059,7 +1059,7 @@ function ScanStage({ asset, animClass }) {
       <div className="sfs-status-pill">
         <div className="sfs-status-dot" />
         <div>
-          <div className="sfs-status-label">Scanning…</div>
+          <div className="sfs-hero-status-label">Scanning…</div>
           <div className="sfs-status-sub">SFS Shield Active</div>
         </div>
       </div>
@@ -1163,7 +1163,7 @@ export default function ScanForSafeHero() {
               ))}
             </div>
 
-            <div className="sfs-actions">
+            <div className="sfs-hero-actions">
               <button className="sfs-btn-main">🔐 Protect Your Assets</button>
               <button className="sfs-btn-sec">
                 <div className="sfs-play-ring">▶</div>
