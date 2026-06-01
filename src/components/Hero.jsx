@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import carImg from "../../assets/car.png";
 import bikeImg from "../../assets/bike.png";
@@ -93,7 +94,7 @@ html { scroll-behavior:smooth; }
   color: var(--dark);
   border: 1.5px solid rgba(46,189,58,0.22);
   border-radius: 32px;
-  margin-top: 20px;
+  margin-top: 104px;
   box-shadow:
     0 0 0 1px rgba(46,189,58,0.08),
     0 8px 48px rgba(46,189,58,0.10),
@@ -128,7 +129,7 @@ html { scroll-behavior:smooth; }
   max-width: 1440px; width: 100%; margin: 0 auto;
   display: grid; grid-template-columns: 44% 56%;
   align-items: center;
-  padding: 72px 72px 52px;
+  padding: 74px 72px 24px;
   position: relative; z-index: 2;
   gap: 0;
 }
@@ -144,8 +145,8 @@ html { scroll-behavior:smooth; }
   border: 1px solid rgba(46,189,58,0.24);
   border-radius: 12px;
   padding: 8px 14px 8px 10px;
-  margin-top: 14px;
-  margin-bottom: 20px;
+  margin-top: 12px;
+  margin-bottom: 12px;
   font-size: 10px; font-weight: 700;
   letter-spacing: .08em; color: #1a4a1e;
   text-transform: uppercase;
@@ -176,8 +177,8 @@ html { scroll-behavior:smooth; }
 
 .sfs-h1 {
   font-family: 'Sora', sans-serif;
-  font-size: 64px; line-height: .92;
-  letter-spacing: -3.5px; font-weight: 900;
+  font-size: 54px; line-height: .92;
+  letter-spacing: -3.0px; font-weight: 900;
   color: var(--dark); margin-bottom: 0;
   animation: slideInLeft .8s .04s cubic-bezier(.22,1,.36,1) both;
 }
@@ -197,21 +198,21 @@ html { scroll-behavior:smooth; }
 }
 
 .sfs-sub {
-  font-size: 14.5px; line-height: 1.82; color: var(--mid);
-  max-width: 480px; margin-bottom: 26px;
+  font-size: 14px; line-height: 1.76; color: var(--mid);
+  max-width: 480px; margin-top: 10px; margin-bottom: 16px;
   font-weight: 400;
   animation: slideInLeft .85s .14s cubic-bezier(.22,1,.36,1) both;
 }
 
 /* ── Feature cards ── */
-.sfs-feats { display: flex; gap: 10px; margin-bottom: 26px; }
+.sfs-feats { display: flex; gap: 10px; margin-bottom: 16px; }
 .sfs-feat {
   flex: 1;
   background: var(--card-bg);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(46,189,58,0.14);
-  border-radius: 20px; padding: 18px 14px 16px;
+  border-radius: 16px; padding: 12px 14px 10px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.7) inset;
   position: relative; overflow: hidden;
   transition: .32s cubic-bezier(.34,1.46,.64,1);
@@ -249,7 +250,7 @@ html { scroll-behavior:smooth; }
 /* ── Buttons ── */
 .sfs-hero-actions {
   display: flex; align-items: center; gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 14px;
   animation: fadeUp .55s .56s both;
 }
 .sfs-btn-main {
@@ -315,7 +316,7 @@ html { scroll-behavior:smooth; }
 .sfs-right {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-  min-height: 640px;
+  min-height: 450px;
 }
 
 /* Floating badges */
@@ -396,6 +397,7 @@ html { scroll-behavior:smooth; }
   position: relative;
   display: flex; align-items: center; justify-content: center;
   width: 100%;
+  min-height: 450px;
 }
 
 /* Radial rings */
@@ -426,14 +428,12 @@ html { scroll-behavior:smooth; }
 
 /* ══ HOW-IT-WORKS STYLE iPHONE MOCKUP ══ */
 .sfs-hiw-phone-wrap {
-  position: relative;
+  position: absolute;
   width: 280px;
   flex-shrink: 0;
   z-index: 5;
   animation: phoneRock 9s ease-in-out infinite;
-    margin-top: -85px;   /* move phone up */
-     scale: 0.85;
-
+  scale: 0.78;
 }
 @keyframes phoneRock {
   0%,100% { transform: perspective(1100px) rotateY(-8deg) rotateX(3deg) translateY(0); }
@@ -683,7 +683,7 @@ html { scroll-behavior:smooth; }
   display: flex; align-items: center; justify-content: center;
 }
 .sfs-asset-img {
-  width: 460px; max-width: none;
+  width: 390px; max-width: none;
   position: relative; z-index: 3; object-fit: contain;
   filter: drop-shadow(0 28px 56px rgba(0,0,0,0.16)) drop-shadow(0 0 36px rgba(46,189,58,0.22));
   animation: assetHover 4.5s ease-in-out infinite;
@@ -720,7 +720,7 @@ html { scroll-behavior:smooth; }
 .sfs-qr-card p  { font-size: 9.5px; color: #5a7060; line-height: 1.4; }
 
 .sfs-status-pill {
-  position: absolute; top: 68px; left: 6px;
+  position: absolute; top: 48px; left: 6px;
   background: var(--card-bg);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-radius: 14px; padding: 9px 13px;
@@ -762,7 +762,7 @@ html { scroll-behavior:smooth; }
   border-top: 1px solid rgba(46,189,58,0.22);
   border-radius: 0 0 30px 30px;
 }
-.sfs-ticker::before {
+.::before {
   content: "";
   position: absolute; inset: 0;
   background: linear-gradient(90deg, rgba(91, 19, 19, 0.18) 0%,  rgba(173, 31, 31, 0.18) 100%);
@@ -805,50 +805,121 @@ html { scroll-behavior:smooth; }
 
 /* ══ RESPONSIVE ══ */
 @media(max-width:1200px){
-  .sfs-hero { border-radius: 22px; margin-top: 16px; }
+  .sfs-hero { border-radius: 22px; margin-top: 84px; }
   .sfs-grid { grid-template-columns:1fr; padding:48px 32px 28px; gap:28px; }
   .sfs-h1 { font-size:50px; letter-spacing:-2.5px; }
-  .sfs-right { min-height:560px; }
+  .sfs-right { min-height:450px; }
   .sfs-asset-img { width:340px; }
   .sfs-shield-badge { width:80px; height:80px; top:20px; right:10px; }
   .sfs-ring-2, .sfs-ring-3 { display:none; }
 }
 
 @media(max-width:640px){
-  .sfs-hero { border-radius: 20px; border-width: 1px; margin-top: 12px; }
-  .sfs-grid { grid-template-columns: 1fr; padding: 36px 18px 24px; gap: 28px; }
-  .sfs-h1 { font-size: 38px; letter-spacing: -1.8px; line-height: 1.0; margin-bottom: 0; }
+  .sfs-hero { border-radius: 20px; border-width: 1px; margin-top: 80px; }
+  .sfs-grid { display: flex !important; flex-direction: column !important; padding: 36px 18px 24px; gap: 16px !important; }
+  .sfs-left { display: contents !important; }
+  
+  .sfs-h1 { order: 1 !important; font-size: 38px; letter-spacing: -1.8px; line-height: 1.0; margin-bottom: 0; text-align: center; }
   .sfs-h1 .outline { -webkit-text-stroke-width: 1.5px; }
-  .sfs-sub { font-size: 13.5px; line-height: 1.78; margin-bottom: 20px; }
-  .sfs-badge { font-size: 8.5px; margin-top: 12px; margin-bottom: 18px; padding: 7px 12px 7px 9px; border-radius: 10px; }
-  .sfs-badge-sep { height: 12px; }
-  .sfs-badge-count { font-size: 8.5px; }
-  .sfs-feats { flex-direction: column; gap: 9px; margin-bottom: 20px; }
-  .sfs-feat { padding: 14px 14px; border-radius: 16px; flex-direction: row; align-items: center; gap: 13px; }
-  .sfs-feat-ico { margin-bottom: 0; }
-  .sfs-feat h4 { font-size: 13px; margin-bottom: 3px; }
-  .sfs-feat p  { font-size: 11px; }
-  .sfs-hero-actions { flex-direction: column; gap: 10px; margin-bottom: 20px; align-items: stretch; }
+  .sfs-sub { order: 2 !important; font-size: 13.5px; line-height: 1.78; margin-top: 14px; margin-bottom: 12px; text-align: center; }
+  
+  /* 3 Feature cards hidden in mobile Layout 1 */
+  .sfs-feats { display: none !important; }
+  
+  /* Phone Mockup ordered 3rd (under subtitle) */
+  .sfs-right { 
+    order: 3 !important; 
+    min-height: 480px !important; 
+    overflow: visible; 
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin-top: 24px !important;
+    margin-bottom: 24px !important;
+  }
+  .sfs-stage { min-height: 480px !important; }
+  
+  /* Phone sizes and frames */
+  .sfs-hiw-phone-wrap { width: 220px !important; }
+  .sfs-hiw-frame { width: 220px !important; height: 440px !important; border-radius: 36px !important; }
+  .sfs-hiw-inner { border-radius: 31px !important; }
+  .sfs-hiw-screen { border-radius: 28px !important; }
+  
+  /* Float Badge 1: Owner Alerted Card (Centered directly above phone notch) */
+  .sfs-alert-badge { 
+    position: absolute !important;
+    left: 50% !important; 
+    top: -24px !important; 
+    transform: translateX(-50%) !important; 
+    padding: 8px 12px !important; 
+    border-radius: 12px !important; 
+    z-index: 20 !important;
+    width: fit-content !important;
+    white-space: nowrap !important;
+    animation: alertFloat 6s ease-in-out infinite !important;
+  }
+  .sfs-alert-ico { width: 28px; height: 28px; font-size: 13px; border-radius: 8px; }
+  
+  /* Float Badge 2: Green Shield Check (Middle Left overlaying phone frame) */
+  .sfs-shield-badge { 
+    position: absolute !important;
+    width: 62px !important; height: 62px !important; 
+    left: -20px !important; 
+    top: 50% !important; 
+    transform: translateY(-50%) !important; 
+    right: auto !important;
+    z-index: 20 !important;
+    animation: shieldFloat 5s ease-in-out infinite !important;
+  }
+  
+  /* Float Badge 3: Yellow Lock (Middle Right overlaying phone frame) */
+  .sfs-lock { 
+    position: absolute !important;
+    width: 44px !important; height: 44px !important; 
+    font-size: 18px !important; 
+    right: -20px !important; 
+    top: 40% !important;
+    transform: translateY(-50%) !important;
+    left: auto !important;
+    z-index: 20 !important;
+    display: flex !important; 
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  /* Float Badge 4: 15,234 Scans Card (Bottom Right overlaying phone frame) */
+  .sfs-scan-badge { 
+    position: absolute !important;
+    right: -32px !important; 
+    bottom: 104px !important; 
+    padding: 8px 12px !important; 
+    border-radius: 11px !important; 
+    z-index: 20 !important;
+    animation: scanBadgeFloat 4.5s ease-in-out infinite !important;
+  }
+  
+  /* CTA Buttons ordered 4th (at the very bottom) */
+  .sfs-hero-actions { 
+    order: 4 !important; 
+    display: flex !important;
+    flex-direction: column !important; 
+    gap: 12px !important; 
+    margin-bottom: 24px !important; 
+    align-items: stretch !important; 
+    width: 100% !important;
+  }
   .sfs-btn-main { padding: 15px 20px; font-size: 14px; border-radius: 13px; justify-content: center; }
-  .sfs-btn-sec  { padding: 14px 20px; font-size: 13.5px; border-radius: 13px; justify-content: center; }
+  .sfs-btn-sec  { padding: 14px 20px; font-size: 13.5px; border-radius: 13px; justify-content: center; color: #2ebd3a !important; border-color: rgba(46,189,58,0.4) !important; background: white !important; }
+  
   .sfs-stats { gap: 12px; flex-wrap: wrap; }
   .sfs-stat-num { font-size: 18px; }
   .sfs-stat-lbl { font-size: 10px; }
   .sfs-stat-div { height: 28px; }
-  .sfs-right { min-height: 580px; overflow: visible; }
-  .sfs-stage { min-height: 580px !important; }
-  .sfs-hiw-phone-wrap { width: 200px; }
-  .sfs-hiw-frame { width: 260px; height: 520px; border-radius: 42px; }
-  .sfs-hiw-inner { border-radius: 37px; }
-  .sfs-hiw-screen { border-radius: 34px; }
-  .sfs-shield-badge { width: 72px; height: 72px; top: 16px; right: 10px; }
-  .sfs-lock { width: 46px; height: 46px; font-size: 20px; right: -4px; }
-  .sfs-ring-1 { width: 280px; height: 280px; }
+  
+  .sfs-ring-1 { width: 260px; height: 260px; }
   .sfs-ring-2, .sfs-ring-3 { display: none; }
-  .sfs-alert-badge { left: 2px; top: 76px; padding: 8px 11px; border-radius: 13px; }
-  .sfs-alert-ico { width: 30px; height: 30px; font-size: 14px; border-radius: 9px; }
-  .sfs-scan-badge { right: 2px; bottom: 80px; padding: 9px 13px; border-radius: 12px; }
-  .sfs-asset-img { width: 300px; }
+  .sfs-asset-img { width: 260px; }
   .sfs-qr-card { right: -6px; bottom: 68px; min-width: 185px; padding: 10px 13px; border-radius: 17px; transform: none; }
   .sfs-qr-icon { width: 44px; height: 44px; font-size: 22px; border-radius: 11px; }
   .sfs-status-pill { top: 52px; left: 4px; padding: 8px 12px; border-radius: 12px; }
@@ -1320,6 +1391,7 @@ function SVGEmergency() {
 
 /* ─── MAIN ─── */
 export default function ScanForSafeHero() {
+  const navigate = useNavigate();
   const [active, setActive] = useState(0);
   const [phase,  setPhase]  = useState("scan");
 
@@ -1387,14 +1459,6 @@ export default function ScanForSafeHero() {
               That <span className="green">Connects</span><br />
               <span className="green">Your World</span>
             </h1>
-
-            <div className="sfs-badge">
-              <div className="sfs-badge-dot" />
-              Live Protection Active
-              <span className="sfs-badge-sep" />
-              <span className="sfs-badge-count">10,000+ Secured</span>
-            </div>
-
             <p className="sfs-sub">
               Protect vehicles, bikes, luggage and valuables with next-generation QR + NFC
               verification. Instant owner alerts and live smart protection — all with a single scan.
@@ -1415,25 +1479,14 @@ export default function ScanForSafeHero() {
             </div>
 
             <div className="sfs-hero-actions">
-              <button className="sfs-btn-main">Pre-Registration</button>
+              <button className="sfs-btn-main" onClick={() => navigate("/preregister")}>Pre-Registration</button>
               <button className="sfs-btn-sec">
                 <div className="sfs-play-ring">▶</div>
                 See How It Works
               </button>
             </div>
 
-            <div className="sfs-stats">
-              <AnimatedStat num={10000} suffix="+" label="Assets Protected" />
-              <div className="sfs-stat-div" />
-              <AnimatedStat num={15000} suffix="+" label="Scans Today" />
-              <div className="sfs-stat-div" />
-              <AnimatedStat num={50} suffix="+" label="Countries" />
-              <div className="sfs-stat-div" />
-              <div className="sfs-stat">
-                <div className="sfs-stat-num">4.9★</div>
-                <div className="sfs-stat-lbl">User Rating</div>
-              </div>
-            </div>
+         
           </div>
 
           {/* RIGHT */}
@@ -1457,7 +1510,7 @@ export default function ScanForSafeHero() {
               </div>
             </div>
 
-            <div className="sfs-stage" style={{ minHeight: 660 }}>
+            <div className="sfs-stage">
               {phase === "scan"      && <ScanStage asset={c} animClass="sfs-scan-in"  />}
               {phase === "scan-out"  && <ScanStage asset={c} animClass="sfs-scan-out" />}
               {phase === "phone"     && <HIWPhone  asset={c} animClass="sfs-entering" />}

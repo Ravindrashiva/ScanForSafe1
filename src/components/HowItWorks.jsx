@@ -224,6 +224,7 @@ function StepCard({ number, icon: Icon, title, description, badge, badgeIcon: Ba
   const [active, setActive] = useState(false);
   return (
     <div
+      className="sfs-step-card-wrap"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => { setHovered(false); setActive(false); }}
       onMouseDown={() => setActive(true)}
@@ -338,12 +339,61 @@ export default function HowItWorks() {
   ];
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      background: "linear-gradient(160deg, #f8fafc 0%, #fafcfa 50%, #f8fafc 100%)",
-      fontFamily: "'Segoe UI', system-ui, sans-serif",
-      overflow: "hidden",
-    }}>
+    <>
+      <style>{`
+        /* ── Responsive StepCard layout ── */
+        .sfs-step-card-wrap {
+          flex: 1 1 280px !important;
+          min-width: 260px !important;
+        }
+
+        /* ── Dotted connector line ── */
+        .sfs-connector-line {
+          position: absolute;
+          top: 50%;
+          left: calc(33.33% - 8px);
+          right: calc(33.33% - 8px);
+          height: 0;
+          border-top: 2px dashed #7ded88;
+          z-index: 0;
+          pointer-events: none;
+        }
+
+        @media (max-width: 850px) {
+          .sfs-connector-line {
+            display: none !important;
+          }
+        }
+
+        /* ── Responsive Stats Item ── */
+        .sfs-stat-item {
+          display: flex;
+          align-items: center;
+          gap: 9px;
+          flex: 1 1 140px;
+          justify-content: center;
+          padding: 4px 0;
+          border-right: 1px solid #e8f8eb;
+        }
+
+        @media (max-width: 768px) {
+          .sfs-stat-item {
+            border-right: none !important;
+            border-bottom: 1px solid #e8f8eb;
+            padding: 10px 0 !important;
+          }
+          .sfs-stat-item:last-child {
+            border-bottom: none !important;
+          }
+        }
+      `}</style>
+
+      <div style={{
+        minHeight: "100vh",
+        background: "linear-gradient(160deg, #f8fafc 0%, #fafcfa 50%, #f8fafc 100%)",
+        fontFamily: "'Segoe UI', system-ui, sans-serif",
+        overflow: "hidden",
+      }}>
       {/* Dot grid background */}
       <div style={{
         position: "fixed", inset: 0, pointerEvents: "none", zIndex: 0,
@@ -415,16 +465,7 @@ export default function HowItWorks() {
             {/* Step cards with dotted connector lines between them */}
             <div style={{ position: "relative", display: "flex", gap: 16, flexWrap: "wrap" }}>
               {/* Dotted connector line between cards — only visible on wide layout */}
-              <div style={{
-                position: "absolute",
-                top: "50%",
-                left: "calc(33.33% - 8px)",
-                right: "calc(33.33% - 8px)",
-                height: 0,
-                borderTop: "2px dashed #7ded88",
-                zIndex: 0,
-                pointerEvents: "none",
-              }} />
+              <div className="sfs-connector-line" />
               {steps.map((s, i) => (
                 <StepCard key={i} {...s} />
               ))}
@@ -501,13 +542,7 @@ export default function HowItWorks() {
           transition: "all 0.6s ease 0.35s",
         }}>
           {stats.map((s, i) => (
-            <div key={i} style={{
-              display: "flex", alignItems: "center", gap: 9,
-              flex: "1 1 140px",
-              justifyContent: "center",
-              padding: "4px 0",
-              borderRight: i < stats.length - 1 ? "1px solid #e8f8eb" : "none",
-            }}>
+            <div key={i} className="sfs-stat-item">
               <div style={{
                 width: 34, height: 34, borderRadius: "50%",
                 background: "#e8f8eb",
@@ -528,5 +563,6 @@ export default function HowItWorks() {
         </div>
       </div>
     </div>
+    </>
   );
 }
