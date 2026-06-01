@@ -1,12 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
+// ── TICKER DATA ──────────────────────────────────────────────────────────────
+const TICKER_ITEMS = [
+  { type: "feature", icon: "📷", text: "QR + NFC Enabled" },
+  { type: "feature", icon: "📵", text: "No App Required" },
+  { type: "feature", icon: "💧", text: "Waterproof Tags" },
+  { type: "feature", icon: "🚨", text: "Secure Emergency Access" },
+];
+
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled,   setScrolled]  = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const location = useLocation();
-  const navigate = useNavigate();
+  const navigate  = useNavigate();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -16,11 +24,11 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { label: "Home", to: "/" },
-    { label: "Features", to: "/features" },
-    { label: "Use Cases", to: "/use-cases" },
+    { label: "Home",         to: "/" },
+    { label: "Features",     to: "/features" },
+    { label: "Use Cases",    to: "/use-cases" },
     { label: "How It Works", to: "/how-it-works" },
-    { label: "Contact", to: "/contact" },
+    { label: "Contact",      to: "/contact" },
   ];
 
   const isActive = (to) =>
@@ -36,11 +44,12 @@ export default function Navbar() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
-        * {
+        *, *::before, *::after {
           box-sizing: border-box;
           -webkit-tap-highlight-color: transparent;
         }
 
+        /* ══ ROOT ══ */
         .sfs-nav {
           position: fixed;
           top: 0; left: 0; right: 0;
@@ -48,31 +57,141 @@ export default function Navbar() {
           font-family: 'Space Grotesk', sans-serif;
         }
 
-        .sfs-topbar {
-          height: 2px;
-          background: linear-gradient(90deg, #064e3b 0%, #16a34a 40%, #4ade80 60%, #16a34a 80%, #064e3b 100%);
+        /* ══ TICKER BAR ══ */
+        .sfs-ticker-bar {
+          height: 32px;
+          background: linear-gradient(90deg, #052e16 0%, #064e3b 40%, #065f46 60%, #064e3b 80%, #052e16 100%);
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+          position: relative;
         }
 
+        .sfs-ticker-label {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          padding: 0 22px 0 14px;
+          height: 100%;
+          background: #16a34a;
+          flex-shrink: 0;
+          z-index: 3;
+          clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 50%, calc(100% - 10px) 100%, 0 100%);
+        }
+
+        .sfs-ticker-label-dot {
+          width: 6px; height: 6px;
+          border-radius: 50%;
+          background: #fff;
+          animation: sfs-blink 1.6s ease-in-out infinite;
+          flex-shrink: 0;
+        }
+
+        .sfs-ticker-label-text {
+          font-size: 9.5px;
+          font-weight: 800;
+          letter-spacing: .14em;
+          text-transform: uppercase;
+          color: #fff;
+          white-space: nowrap;
+        }
+
+        .sfs-ticker-bar::after {
+          content: "";
+          position: absolute;
+          right: 0; top: 0; bottom: 0;
+          width: 60px;
+          background: linear-gradient(90deg, transparent, #064e3b);
+          z-index: 2;
+          pointer-events: none;
+        }
+
+        .sfs-ticker-track {
+          flex: 1;
+          overflow: hidden;
+          position: relative;
+          height: 100%;
+          display: flex;
+          align-items: center;
+        }
+
+        .sfs-ticker-belt {
+          display: flex;
+          align-items: center;
+          white-space: nowrap;
+          will-change: transform;
+          animation: sfs-marquee 22s linear infinite;
+        }
+
+        .sfs-ticker-belt:hover { animation-play-state: paused; }
+
+        @keyframes sfs-marquee {
+          0%   { transform: translateX(0); }
+          100% { transform: translateX(-25%); }
+        }
+
+        .sfs-ticker-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          padding: 0 26px;
+          border-right: 1px solid rgba(255,255,255,.08);
+          flex-shrink: 0;
+        }
+
+        .sfs-ticker-icon { font-size: 11px; flex-shrink: 0; line-height: 1; }
+        .sfs-ticker-text {
+          font-size: 11px;
+          font-weight: 600;
+          color: rgba(255,255,255,.78);
+          white-space: nowrap;
+          letter-spacing: .015em;
+        }
+
+        .sfs-ticker-item[data-type="feature"] .sfs-ticker-text {
+          color: #fcd34d;
+          font-weight: 700;
+          letter-spacing: .02em;
+        }
+        .sfs-ticker-item[data-type="feature"] .sfs-ticker-icon { font-size: 12px; }
+        .sfs-ticker-item[data-type="feature"] { border-right: 1px solid rgba(74,222,128,.15); }
+
+        /* ══ TOPBAR LINE ══ */
+        .sfs-topbar {
+          height: 2px;
+          background: linear-gradient(90deg,
+            #064e3b 0%, #16a34a 30%, #4ade80 50%, #16a34a 70%, #064e3b 100%
+          );
+          background-size: 200% 100%;
+          animation: sfs-shimmer-line 4s linear infinite;
+        }
+
+        @keyframes sfs-shimmer-line {
+          0%   { background-position: 100% 0; }
+          100% { background-position: -100% 0; }
+        }
+
+        /* ══ MAIN BAR ══ */
         .sfs-bar {
-          height: 80px;
+          height: 72px;
           display: flex;
           align-items: center;
           justify-content: space-between;
           padding: 0 40px;
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(14px);
-          border-bottom: 1px solid rgba(226,232,240,0.8);
+          background: rgba(255,255,255,0.98);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-bottom: 1px solid rgba(226,232,240,.9);
           transition: height .35s ease, box-shadow .35s ease;
-          box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+          box-shadow: 0 1px 0 rgba(0,0,0,.04);
         }
 
         .sfs-nav.scrolled .sfs-bar {
-          height: 66px;
-          box-shadow: 0 4px 24px rgba(6,78,59,0.08), 0 1px 0 rgba(0,0,0,0.04);
+          height: 60px;
+          box-shadow: 0 6px 30px rgba(6,78,59,.09), 0 1px 0 rgba(0,0,0,.04);
         }
 
-        /* ── LOGO ── */
-
+        /* ══ LOGO ══ */
         .sfs-logo {
           display: flex;
           align-items: center;
@@ -83,97 +202,154 @@ export default function Navbar() {
 
         .sfs-badge-wrap {
           position: relative;
-          width: 62px;
-          height: 62px;
+          width: 56px;
+          height: 56px;
           flex-shrink: 0;
-          transition: width .35s ease, height .35s ease, transform .25s ease;
+          transition: width .35s ease, height .35s ease;
         }
 
-        .sfs-nav.scrolled .sfs-badge-wrap {
-          width: 50px;
-          height: 50px;
-        }
+        .sfs-nav.scrolled .sfs-badge-wrap { width: 44px; height: 44px; }
 
-        .sfs-logo:hover .sfs-badge-wrap {
-          transform: scale(1.05);
-        }
-
-        /* Dual pulse rings */
-        // .sfs-pulse-ring {
-        //   position: absolute;
-        //   inset: -7px;
-        //   border-radius: 24px;
-        //   border: 1.5px solid rgba(34,197,94,0.35);
-        //   animation: sfs-pulse-out 2.8s ease-out infinite;
-        //   pointer-events: none;
-        // }
-        // .sfs-pulse-ring:nth-child(2) {
-        //   animation-delay: 1s;
-        //   inset: -14px;
-        //   border-radius: 29px;
-        // }
-
-        @keyframes sfs-pulse-out {
-          0%   { opacity: 0.75; transform: scale(0.9); }
-          100% { opacity: 0;    transform: scale(1.2); }
-        }
-
-        /* Spinning conic ring — speeds up on hover */
-        .sfs-ring-outer {
+        .sfs-badge-shell {
           position: absolute;
           inset: 0;
-          border-radius: 16px;
-          background: linear-gradient(145deg, #22c55e, #16a34a, #1e40af);
+          border-radius: 14px;
+          background: linear-gradient(145deg, #22c55e, #16a34a, #059669);
           padding: 2.5px;
           transition: border-radius .35s ease;
+          overflow: hidden;
         }
 
-        .sfs-nav.scrolled .sfs-ring-outer {
-          border-radius: 15px;
-        }
+        .sfs-nav.scrolled .sfs-badge-shell { border-radius: 12px; }
 
-        .sfs-logo:hover .sfs-ring-outer {
-          animation-duration: 1.4s;
-        }
-
-        // @keyframes sfs-spin-ring {
-        //   from { transform: rotate(100deg); }
-        //   to   { transform: rotate(360deg); }
-        // }
-
-        /* White face */
         .sfs-badge-face {
           width: 100%;
           height: 100%;
-          border-radius: 14px;
-          background: #ffffff;
+          border-radius: 11px;
+          background: #fff;
           display: flex;
           align-items: center;
           justify-content: center;
           overflow: hidden;
+          position: relative;
           transition: border-radius .35s ease;
         }
 
-        .sfs-nav.scrolled .sfs-badge-face {
-          border-radius: 11px;
+        .sfs-nav.scrolled .sfs-badge-face { border-radius: 9px; }
+
+        .sfs-scan-laser {
+          position: absolute;
+          left: 0; right: 0;
+          height: 2px;
+          background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(34,197,94,.0) 10%,
+            rgba(34,197,94,.85) 40%,
+            #4ade80 50%,
+            rgba(34,197,94,.85) 60%,
+            rgba(34,197,94,.0) 90%,
+            transparent 100%
+          );
+          box-shadow: 0 0 8px 2px rgba(74,222,128,.6);
+          animation: sfs-laser-scan 2.4s cubic-bezier(.4,0,.6,1) infinite;
+          pointer-events: none;
+          z-index: 3;
         }
 
-        /* Logo — mix-blend-mode removes the black background */
+        @keyframes sfs-laser-scan {
+          0%   { top: 8%;  opacity: 0; }
+          8%   { opacity: 1; }
+          50%  { top: 88%; opacity: 1; }
+          58%  { top: 88%; opacity: 0; }
+          100% { top: 8%;  opacity: 0; }
+        }
+
+        .sfs-badge-wrap::before, .sfs-badge-wrap::after {
+          content: "";
+          position: absolute;
+          width: 10px; height: 10px;
+          z-index: 4;
+          pointer-events: none;
+          opacity: 0;
+          animation: sfs-corners-appear 2.4s ease-in-out infinite;
+        }
+
+        .sfs-badge-wrap::before {
+          top: -3px; left: -3px;
+          border-top: 2px solid #4ade80;
+          border-left: 2px solid #4ade80;
+          border-radius: 2px 0 0 0;
+        }
+
+        .sfs-badge-wrap::after {
+          bottom: -3px; right: -3px;
+          border-bottom: 2px solid #4ade80;
+          border-right: 2px solid #4ade80;
+          border-radius: 0 0 2px 0;
+        }
+
+        @keyframes sfs-corners-appear {
+          0%,8%    { opacity: 0; }
+          12%,55%  { opacity: 1; }
+          60%,100% { opacity: 0; }
+        }
+
+        .sfs-scan-corner-tr, .sfs-scan-corner-bl {
+          position: absolute;
+          width: 10px; height: 10px;
+          z-index: 4;
+          pointer-events: none;
+          opacity: 0;
+          animation: sfs-corners-appear 2.4s ease-in-out infinite;
+        }
+
+        .sfs-scan-corner-tr { top: -3px; right: -3px; border-top: 2px solid #4ade80; border-right: 2px solid #4ade80; border-radius: 0 2px 0 0; }
+        .sfs-scan-corner-bl { bottom: -3px; left: -3px; border-bottom: 2px solid #4ade80; border-left: 2px solid #4ade80; border-radius: 0 0 0 2px; }
+
+        .sfs-scan-glow {
+          position: absolute;
+          inset: 0;
+          border-radius: 11px;
+          background: radial-gradient(circle at 50% 50%, rgba(74,222,128,.15) 0%, transparent 70%);
+          animation: sfs-glow-pulse 2.4s ease-in-out infinite;
+          pointer-events: none;
+          z-index: 2;
+        }
+
+        @keyframes sfs-glow-pulse {
+          0%,10% { opacity: 0; }
+          30%    { opacity: 1; }
+          55%    { opacity: 0; }
+          100%   { opacity: 0; }
+        }
+
         .sfs-badge-img {
-          width: 92%;
-          height: 92%;
+          width: 90%; height: 90%;
           object-fit: contain;
           mix-blend-mode: multiply;
-          transition: transform .4s cubic-bezier(.34,1.3,.64,1);
-          border-radius: 6px;
+          position: relative;
+          z-index: 1;
+          transition: transform .35s ease;
         }
 
-        .sfs-logo:hover .sfs-badge-img {
-          transform: scale(1.08);
+        .sfs-logo:hover .sfs-badge-img { transform: scale(1.06); }
+
+        .sfs-ping-ring {
+          position: absolute;
+          inset: -5px;
+          border-radius: 20px;
+          border: 1.5px solid rgba(74,222,128,.5);
+          animation: sfs-ping-out 2.4s ease-out infinite;
+          pointer-events: none;
         }
 
-        /* ── WORDMARK ── */
+        @keyframes sfs-ping-out {
+          0%   { opacity: .7; transform: scale(.88); inset: -5px; }
+          70%  { opacity: 0;  transform: scale(1.1); inset: -12px; }
+          100% { opacity: 0; }
+        }
 
+        /* ══ WORDMARK ══ */
         .sfs-wordmark {
           display: flex;
           flex-direction: column;
@@ -210,15 +386,14 @@ export default function Navbar() {
           align-items: center;
           gap: 4px;
           background: #f0fdf4;
-          border: 1px solid rgba(22,163,74,0.25);
+          border: 1px solid rgba(22,163,74,.25);
           border-radius: 999px;
           padding: 2px 7px;
           flex-shrink: 0;
         }
 
         .sfs-status-pulse {
-          width: 5px;
-          height: 5px;
+          width: 5px; height: 5px;
           border-radius: 50%;
           background: #16a34a;
           animation: sfs-blink 2.2s ease-in-out infinite;
@@ -226,8 +401,8 @@ export default function Navbar() {
         }
 
         @keyframes sfs-blink {
-          0%, 100% { opacity: 0.4; transform: scale(0.8); }
-          50%       { opacity: 1;   transform: scale(1.2); }
+          0%,100% { opacity: .4; transform: scale(.8); }
+          50%      { opacity: 1;  transform: scale(1.2); }
         }
 
         .sfs-status-label {
@@ -248,12 +423,10 @@ export default function Navbar() {
           white-space: nowrap;
         }
 
-        /* ── NAV LINKS ── */
-
+        /* ══ NAV LINKS ══ */
         .sfs-links {
           display: flex;
           align-items: center;
-          gap: 0;
           margin-left: auto;
           margin-right: 20px;
         }
@@ -270,32 +443,19 @@ export default function Navbar() {
           transition: color .2s ease, background .2s ease;
         }
 
-        .sfs-link:hover {
-          color: #15803d;
-          background: rgba(220,252,231,.6);
-        }
-
-        .sfs-link.active {
-          color: #15803d;
-        }
-
+        .sfs-link:hover { color: #15803d; background: rgba(220,252,231,.6); }
+        .sfs-link.active { color: #15803d; }
         .sfs-link.active::after {
           content: "";
           position: absolute;
-          left: 14px; right: 14px;
-          bottom: 4px;
+          left: 14px; right: 14px; bottom: 4px;
           height: 2px;
           border-radius: 999px;
           background: linear-gradient(90deg, #16a34a, #4ade80);
         }
 
-        /* ── ACTIONS ── */
-
-        .sfs-actions {
-          display: flex;
-          align-items: center;
-          gap: 10px;
-        }
+        /* ══ ACTIONS ══ */
+        .sfs-actions { display: flex; align-items: center; gap: 10px; }
 
         .sfs-login {
           height: 40px;
@@ -314,7 +474,7 @@ export default function Navbar() {
 
         .sfs-login:hover {
           background: #e8f8eb;
-          border-color: rgba(46, 189, 58, .65);
+          border-color: rgba(46,189,58,.65);
           transform: translateY(-1px);
         }
 
@@ -339,26 +499,23 @@ export default function Navbar() {
         }
 
         .sfs-prereg:hover {
-          background: #1b7a21;
+          background: #15803d;
           transform: translateY(-1px);
           box-shadow: 0 1px 0 rgba(0,0,0,.12), 0 8px 24px rgba(22,163,74,.38);
         }
 
         .prereg-dot {
-          width: 6px;
-          height: 6px;
+          width: 6px; height: 6px;
           border-radius: 50%;
           background: #86efac;
           flex-shrink: 0;
           animation: sfs-blink 1.8s ease-in-out infinite;
         }
 
-        /* ── MOBILE ── */
-
+        /* ══ MOBILE TOGGLE ══ */
         .sfs-mobile-btn {
           display: none;
-          width: 40px;
-          height: 40px;
+          width: 40px; height: 40px;
           border: 1px solid rgba(22,163,74,.2);
           border-radius: 10px;
           background: #f0fdf4;
@@ -368,7 +525,8 @@ export default function Navbar() {
           align-items: center;
           justify-content: center;
         }
- 
+
+        /* ══ MOBILE DRAWER ══ */
         .sfs-mobile-overlay {
           position: fixed;
           inset: 0;
@@ -380,10 +538,7 @@ export default function Navbar() {
           z-index: 9998;
         }
 
-        .sfs-mobile-overlay.open {
-          opacity: 1;
-          pointer-events: auto;
-        }
+        .sfs-mobile-overlay.open { opacity: 1; pointer-events: auto; }
 
         .sfs-mobile-drawer {
           position: absolute;
@@ -391,7 +546,7 @@ export default function Navbar() {
           width: min(88vw, 310px);
           height: 100%;
           background: #fff;
-          padding: 84px 20px 30px;
+          padding: 90px 20px 30px;
           display: flex;
           flex-direction: column;
           gap: 6px;
@@ -400,9 +555,7 @@ export default function Navbar() {
           box-shadow: -8px 0 40px rgba(15,23,42,.12);
         }
 
-        .sfs-mobile-overlay.open .sfs-mobile-drawer {
-          transform: translateX(0);
-        }
+        .sfs-mobile-overlay.open .sfs-mobile-drawer { transform: translateX(0); }
 
         .sfs-mobile-link {
           padding: 12px 14px;
@@ -414,8 +567,7 @@ export default function Navbar() {
           transition: all .15s ease;
         }
 
-        .sfs-mobile-link:hover,
-        .sfs-mobile-link.active {
+        .sfs-mobile-link:hover, .sfs-mobile-link.active {
           background: rgba(220,252,231,.8);
           color: #15803d;
         }
@@ -458,40 +610,55 @@ export default function Navbar() {
           background: transparent;
         }
 
-        /* ── RESPONSIVE ── */
-
-        @media (max-width: 980px) {
-          .sfs-links,
-          .sfs-actions { display: none; }
+        /* ══ RESPONSIVE ══ */
+        @media (max-width: 1060px) {
+          .sfs-links, .sfs-actions { display: none; }
           .sfs-mobile-btn { display: flex; }
-          .sfs-bar { height: 68px; padding: 0 18px; }
-          .sfs-badge-wrap { width: 50px; height: 50px; }
+          .sfs-bar { height: 64px; padding: 0 18px; }
+          .sfs-badge-wrap { width: 46px; height: 46px; }
         }
 
-        @media (max-width: 480px) {
-          .sfs-status { display: none; }
-        }
-
-        @media (max-width: 380px) {
-          .sfs-wordmark-secondary { display: none; }
-        }
+        @media (max-width: 480px) { .sfs-status { display: none; } }
+        @media (max-width: 380px) { .sfs-wordmark-secondary { display: none; } }
       `}</style>
 
       <header className={`sfs-nav ${scrolled ? "scrolled" : ""}`}>
+
+        {/* ── TICKER BAR ── */}
+        <div className="sfs-ticker-bar">
+          <div className="sfs-ticker-label">
+            <span className="sfs-ticker-label-dot" />
+            <span className="sfs-ticker-label-text">Live Feed</span>
+          </div>
+          <div className="sfs-ticker-track">
+            <div className="sfs-ticker-belt">
+              {[...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS, ...TICKER_ITEMS].map((it, idx) => (
+                <span key={idx} className="sfs-ticker-item" data-type={it.type}>
+                  <span className="sfs-ticker-icon">{it.icon}</span>
+                  <span className="sfs-ticker-text">{it.text}</span>
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── TOPBAR LINE ── */}
         <div className="sfs-topbar" />
 
+        {/* ── MAIN BAR ── */}
         <div className="sfs-bar">
 
-          {/* ── LOGO ── */}
+          {/* LOGO */}
           <Link to="/" className="sfs-logo">
             <div className="sfs-badge-wrap">
-              <div className="sfs-badge-border">
+              <div className="sfs-ping-ring" />
+              <div className="sfs-scan-corner-tr" />
+              <div className="sfs-scan-corner-bl" />
+              <div className="sfs-badge-shell">
                 <div className="sfs-badge-face">
-                  <img
-                    src="/logo.png"
-                    alt="ScanForSafe"
-                    className="sfs-badge-img"
-                  />
+                  <div className="sfs-scan-laser" />
+                  <div className="sfs-scan-glow" />
+                  <img src="/logo.png" alt="ScanForSafe" className="sfs-badge-img" />
                 </div>
               </div>
             </div>
@@ -506,14 +673,12 @@ export default function Navbar() {
                   <span className="sfs-status-label">Smart Shield</span>
                 </div>
               </div>
-              <div className="sfs-wordmark-secondary">
-                Innovations Pvt Ltd
-              </div>
+              <div className="sfs-wordmark-secondary">Innovations Pvt Ltd</div>
             </div>
           </Link>
 
-          {/* ── NAV LINKS ── */}
-          <nav className="sfs-links" style={{ display: 'flex', alignItems: 'center', gap: '0px' }}>
+          {/* NAV LINKS */}
+          <nav className="sfs-links">
             {navLinks.map((item) => (
               <Link
                 key={item.label}
@@ -525,18 +690,16 @@ export default function Navbar() {
             ))}
           </nav>
 
-          {/* ── ACTIONS ── */}
+          {/* ACTIONS */}
           <div className="sfs-actions">
-            <Link to="/login" className="sfs-login">
-              Login
-            </Link>
+            <Link to="/login" className="sfs-login">Login</Link>
             <button className="sfs-prereg" onClick={handlePreRegistration}>
               <span className="prereg-dot" />
               Pre Registration
             </button>
           </div>
 
-          {/* ── MOBILE TOGGLE ── */}
+          {/* MOBILE TOGGLE */}
           <button
             className="sfs-mobile-btn"
             onClick={() => setMobileOpen(true)}
@@ -552,10 +715,7 @@ export default function Navbar() {
         className={`sfs-mobile-overlay ${mobileOpen ? "open" : ""}`}
         onClick={() => setMobileOpen(false)}
       >
-        <div
-          className="sfs-mobile-drawer"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className="sfs-mobile-drawer" onClick={(e) => e.stopPropagation()}>
           {navLinks.map((item) => (
             <Link
               key={item.label}
@@ -566,13 +726,8 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
-
           <div className="sfs-mobile-actions">
-            <Link
-              to="/login"
-              className="sfs-mobile-login"
-              onClick={() => setMobileOpen(false)}
-            >
+            <Link to="/login" className="sfs-mobile-login" onClick={() => setMobileOpen(false)}>
               Login
             </Link>
             <button className="sfs-mobile-prereg" onClick={handlePreRegistration}>
