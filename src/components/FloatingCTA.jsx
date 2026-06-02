@@ -1,21 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
 
-/* ══ SVG ICONS ══ */
-function WhatsAppSVG() {
-  return (
-    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="16" cy="16" r="16" fill="none"/>
-      <path fillRule="evenodd" clipRule="evenodd"
-        d="M16 5C10.477 5 6 9.477 6 15c0 1.89.527 3.656 1.44 5.166L6 27l7.013-1.41A9.948 9.948 0 0016 26c5.523 0 10-4.477 10-10S21.523 5 16 5zm-4.5 6.5c.18-.01.36.08.47.23l1.22 1.8a.66.66 0 01-.04.78l-.61.76a4.72 4.72 0 001.88 2.16l.77-.76a.66.66 0 01.8-.07l1.85 1.12c.17.1.27.3.25.5l-.21 1.57a.65.65 0 01-.64.54C13.63 19.73 10.5 16.44 10.5 12.62c0-.34.26-.62.6-.64l1.4-.08z"
-        fill="white"
-      />
-    </svg>
-  )
-}
+/* =========================================
+   SVG ICONS
+========================================= */
 
 function BotSVG() {
   return (
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
       <rect x="2" y="7" width="20" height="14" rx="3" stroke="white" strokeWidth="1.8"/>
       <circle cx="8.5" cy="14" r="1.5" fill="white"/>
       <circle cx="15.5" cy="14" r="1.5" fill="white"/>
@@ -29,164 +20,548 @@ function BotSVG() {
 function SendSVG() {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-      <path d="M22 2L11 13" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-      <path d="M22 2L15 22l-4-9-9-4 20-7z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    </svg>
-  )
-}
-
-function SparklesSVG() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" style={{position:'absolute',top:10,right:10}}>
-      <path d="M12 2l2.09 6.26L20.18 10l-6.09 1.74L12 18l-2.09-5.26L3.82 10l6.09-1.74L12 2z" fill="rgba(255,255,255,0.8)"/>
-      <path d="M19 14l.72 2.18L22 17l-2.28.82L19 20l-.72-2.18L16 17l2.28-.82L19 14z" fill="rgba(255,255,255,0.6)"/>
-    </svg>
-  )
-}
-
-function XSvg({ size = 18 }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
-      <path d="M18 6L6 18M6 6l12 12" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      <path d="M22 2L11 13" stroke="white" strokeWidth="2.2" strokeLinecap="round"/>
+      <path d="M22 2L15 22l-4-9-9-4 20-7z" fill="white" stroke="white" strokeWidth="1.5"/>
     </svg>
   )
 }
 
 function LoaderSVG() {
   return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{animation:'spin 1s linear infinite'}}>
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" style={{ animation: 'spin 1s linear infinite' }}>
       <circle cx="12" cy="12" r="10" stroke="rgba(255,255,255,0.3)" strokeWidth="2.5"/>
       <path d="M12 2a10 10 0 0110 10" stroke="white" strokeWidth="2.5" strokeLinecap="round"/>
     </svg>
   )
 }
 
-/* ══ QUICK OPTIONS ══ */
-const QUICK_OPTIONS = [
-  { icon: '📦', label: 'How it Works', reply: 'ScanForSafe works using smart QR + NFC tags. If someone finds your lost item, they simply scan the tag and you instantly receive alerts and location updates.' },
-  { icon: '🔐', label: 'Privacy & Security', reply: 'Your personal details stay protected. Only emergency or recovery information is shared securely after scanning.' },
-  { icon: '📍', label: 'Track Lost Items', reply: 'Once a QR tag is scanned, you receive live notifications and the finder can contact you instantly through the secure system.' },
-  { icon: '💧', label: 'Waterproof Tags', reply: 'Yes! All ScanForSafe smart tags are waterproof, durable, and built for daily use.' },
-  { icon: '📵', label: 'No App Needed', reply: 'No app installation is required. Users can scan directly using their phone camera.' },
-  { icon: '🚀', label: 'Get Started', reply: 'You can start by registering your smart QR tag and linking your emergency contact information securely.' },
+function XSvg({ size = 16, color = 'white' }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <path d="M18 6L6 18M6 6l12 12" stroke={color} strokeWidth="2.2" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+function ClipSVG() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+      <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" stroke="#64748b" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+function SparklesSVG() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2l2.4 7.2H22l-6.2 4.5 2.4 7.3L12 16.5 5.8 21l2.4-7.3L2 9.2h7.6L12 2z" fill="#60a5fa" stroke="#60a5fa" strokeWidth="0.5"/>
+    </svg>
+  )
+}
+
+/* =========================================
+   TOPIC ICONS
+========================================= */
+
+function GearIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="3" stroke="#60a5fa" strokeWidth="1.8"/>
+      <path d="M12 2v2M12 20v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M2 12h2M20 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="#60a5fa" strokeWidth="1.6" strokeLinecap="round"/>
+    </svg>
+  )
+}
+
+function CarIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <path d="M5 11l1.5-4.5h11L19 11" stroke="#60a5fa" strokeWidth="1.6" strokeLinecap="round"/>
+      <rect x="2" y="11" width="20" height="7" rx="2" stroke="#60a5fa" strokeWidth="1.6"/>
+      <circle cx="7" cy="18" r="2" stroke="#60a5fa" strokeWidth="1.6"/>
+      <circle cx="17" cy="18" r="2" stroke="#60a5fa" strokeWidth="1.6"/>
+    </svg>
+  )
+}
+
+function TargetIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <circle cx="12" cy="12" r="10" stroke="#60a5fa" strokeWidth="1.6"/>
+      <circle cx="12" cy="12" r="6" stroke="#60a5fa" strokeWidth="1.6"/>
+      <circle cx="12" cy="12" r="2" fill="#60a5fa"/>
+    </svg>
+  )
+}
+
+function ShieldIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#60a5fa" strokeWidth="1.6" strokeLinejoin="round"/>
+    </svg>
+  )
+}
+
+function QRIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <rect x="3" y="3" width="7" height="7" rx="1" stroke="#60a5fa" strokeWidth="1.6"/>
+      <rect x="5" y="5" width="3" height="3" fill="#60a5fa"/>
+      <rect x="14" y="3" width="7" height="7" rx="1" stroke="#60a5fa" strokeWidth="1.6"/>
+      <rect x="16" y="5" width="3" height="3" fill="#60a5fa"/>
+      <rect x="3" y="14" width="7" height="7" rx="1" stroke="#60a5fa" strokeWidth="1.6"/>
+      <rect x="5" y="16" width="3" height="3" fill="#60a5fa"/>
+      <path d="M14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2z" fill="#60a5fa"/>
+    </svg>
+  )
+}
+
+function NFCIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+      <path d="M5 12a7 7 0 017-7" stroke="#60a5fa" strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M5 12a7 7 0 007 7" stroke="#60a5fa" strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M8 12a4 4 0 014-4" stroke="#60a5fa" strokeWidth="1.6" strokeLinecap="round"/>
+      <path d="M8 12a4 4 0 004 4" stroke="#60a5fa" strokeWidth="1.6" strokeLinecap="round"/>
+      <circle cx="12" cy="12" r="1.5" fill="#60a5fa"/>
+    </svg>
+  )
+}
+
+const QUICK_TOPICS = [
+  { label: 'How ScanForSafe works', Icon: GearIcon },
+  { label: 'Vehicle Protection', Icon: CarIcon },
+  { label: 'Lost Item Recovery', Icon: TargetIcon },
+  { label: 'Emergency Support', Icon: ShieldIcon },
+  { label: 'QR Smart Tags', Icon: QRIcon },
+  { label: 'NFC Technology', Icon: NFCIcon },
 ]
 
-/* ══ AI CHAT WINDOW ══ */
+/* =========================================
+   TIME HELPER
+========================================= */
+
+function getTime() {
+  const d = new Date()
+  let h = d.getHours()
+  const m = String(d.getMinutes()).padStart(2, '0')
+  const ampm = h >= 12 ? 'PM' : 'AM'
+  h = h % 12 || 12
+  return `${h}:${m} ${ampm}`
+}
+
+/* =========================================
+   TYPEWRITER
+========================================= */
+
+function useTypewriter(text, speed = 12) {
+  const [displayed, setDisplayed] = useState('')
+  useEffect(() => {
+    let i = 0
+    setDisplayed('')
+    const interval = setInterval(() => {
+      setDisplayed(text.slice(0, i + 1))
+      i++
+      if (i >= text.length) clearInterval(interval)
+    }, speed)
+    return () => clearInterval(interval)
+  }, [text, speed])
+  return displayed
+}
+
+function TypingMessage({ text }) {
+  const typed = useTypewriter(text)
+  return <>{typed}</>
+}
+
+/* =========================================
+   AI RESPONSE ENGINE
+========================================= */
+
+function getAIResponse(message) {
+  const msg = message.toLowerCase()
+
+  if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+    return `👋 Welcome to ScanForSafe AI Assistant.\n\nWe help protect:\n• Vehicles\n• Luggage\n• Children\n• Pets\n• Elderly family members\n• Personal belongings\n\nOur smart QR + NFC protection system provides instant recovery support, emergency access, and secure communication.\n\nHow may I assist you today?`
+  }
+
+  if (msg.includes('how') || msg.includes('work') || msg.includes('scanforsafe')) {
+    return `📦 ScanForSafe works using intelligent QR + NFC technology.\n\nHOW IT WORKS:\n\n1️⃣ Attach your ScanForSafe smart tag\n2️⃣ If the item is lost, someone scans the QR\n3️⃣ You instantly receive alerts\n4️⃣ Secure communication begins\n5️⃣ Recovery assistance is activated\n\nEverything works instantly without requiring a mobile app.`
+  }
+
+  if (msg.includes('vehicle') || msg.includes('bike') || msg.includes('car') || msg.includes('theft')) {
+    return `🚗 ScanForSafe Vehicle Protection helps owners recover stolen or missing vehicles faster.\n\nKey Features:\n✅ Instant QR identification\n✅ Theft recovery support\n✅ Community alert activation\n✅ Emergency response coordination\n✅ Police assistance workflow\n\nMissing vehicle alerts can be published within minutes after activation.`
+  }
+
+  if (msg.includes('family') || msg.includes('child') || msg.includes('elder') || msg.includes('pet')) {
+    return `👨‍👩‍👧‍👦 ScanForSafe helps families stay protected every day.\n\nFamilies use ScanForSafe on:\n• Child school bags\n• Elder safety wristbands\n• Pet tags\n• Luggage\n• Vehicles\n\nOne quick scan can provide:\n✅ Emergency contact access\n✅ Instant owner communication\n✅ Faster recovery support`
+  }
+
+  if (msg.includes('lost') || msg.includes('missing') || msg.includes('recovery') || msg.includes('track')) {
+    return `📍 ScanForSafe Lost Item Recovery System provides rapid response assistance.\n\nWhen a smart QR tag is scanned:\n✅ The owner receives instant alerts\n✅ Finder communication is enabled\n✅ Recovery workflow begins immediately\n✅ Emergency support can be activated`
+  }
+
+  if (msg.includes('nfc')) {
+    return `📱 ScanForSafe NFC technology enables instant tap-based access.\n\nBenefits:\n⚡ Faster than QR scanning\n⚡ No mobile app required\n⚡ Secure smart access\n⚡ Emergency information support`
+  }
+
+  if (msg.includes('qr') || msg.includes('tag')) {
+    return `🏷️ ScanForSafe Smart QR Tags provide intelligent protection for valuables and emergency safety.\n\nOur QR tags are:\n✅ Waterproof\n✅ Durable\n✅ Lightweight\n✅ Secure\n✅ Easy to scan`
+  }
+
+  if (msg.includes('secure') || msg.includes('privacy') || msg.includes('safe')) {
+    return `🔐 Security and privacy are core priorities at ScanForSafe.\n\nWe provide:\n✅ Controlled information sharing\n✅ Secure communication\n✅ Emergency-only access options\n✅ Protected user profiles`
+  }
+
+  if (msg.includes('app')) {
+    return `📵 No app installation is required.\n\nUsers can:\n1️⃣ Open phone camera\n2️⃣ Scan QR code\n3️⃣ Access secure information instantly`
+  }
+
+  if (msg.includes('emergency')) {
+    return `🚨 ScanForSafe Emergency Profiles help responders and families act quickly during emergencies.\n\nFeatures include:\n✅ Emergency contact access\n✅ Medical information support\n✅ Fast family communication\n✅ Smart emergency identification`
+  }
+
+  return `🤖 Thank you for contacting ScanForSafe.\n\nScanForSafe is a smart protection ecosystem designed for:\n• Vehicle safety\n• Family protection\n• Lost item recovery\n• Emergency support\n• QR + NFC smart identification\n\nPlease ask me about:\n✅ Vehicle protection\n✅ QR tags\n✅ NFC technology\n✅ Family safety\n✅ Emergency profiles\n✅ Recovery assistance`
+}
+
+/* =========================================
+   CHAT WINDOW
+========================================= */
+
 function AIChatWindow({ onClose }) {
-  const [messages, setMessages] = useState([{ role: 'assistant', content: '👋 Welcome to ScanForSafe AI Assistant.\n\nChoose any option below or ask your own question.' }])
+  const [messages, setMessages] = useState([
+    {
+      role: 'assistant',
+      content: '👋 Welcome to ScanForSafe AI Assistant.\n\nHow may I help you today?',
+      time: getTime(),
+    },
+  ])
   const [input, setInput] = useState('')
   const [loading, setLoading] = useState(false)
   const bottomRef = useRef(null)
 
-  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }) }, [messages, loading])
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages, loading])
 
   async function sendMessage(customText = null) {
     const text = customText || input.trim()
     if (!text || loading) return
     if (!customText) setInput('')
-    setMessages(prev => [...prev, { role: 'user', content: text }])
+
+    const userTime = getTime()
+    setMessages(prev => [...prev, { role: 'user', content: text, time: userTime }])
     setLoading(true)
+
     try {
-      await new Promise(r => setTimeout(r, 900))
-      const option = QUICK_OPTIONS.find(o => o.label.toLowerCase() === text.toLowerCase())
-      const reply = option ? option.reply : 'Thanks for your message 🚀 Our ScanForSafe support team will help you regarding QR tags, recovery, NFC setup, and emergency access.'
-      setMessages(prev => [...prev, { role: 'assistant', content: reply }])
-    } catch { setMessages(prev => [...prev, { role: 'assistant', content: 'Something went wrong. Please try again.' }]) }
-    finally { setLoading(false) }
+      await new Promise(resolve => setTimeout(resolve, 1200))
+      const aiReply = getAIResponse(text)
+      const aiTime = getTime()
+      setMessages(prev => [...prev, { role: 'assistant', content: aiReply, time: aiTime }])
+    } catch {
+      setMessages(prev => [...prev, { role: 'assistant', content: '⚠️ Something went wrong.', time: getTime() }])
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <div style={{
-      position:'fixed', bottom:'100px', right:'24px', zIndex:100, width:'370px', maxHeight:'620px',
-      background:'linear-gradient(145deg,#0d1b2a,#162236)',
-      borderRadius:'28px', overflow:'hidden', display:'flex', flexDirection:'column',
-      border:'1.5px solid rgba(99,179,255,0.18)',
-      boxShadow:'0 32px 80px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04) inset',
-      backdropFilter:'blur(20px)',
-      animation:'chatPopup .4s cubic-bezier(.34,1.56,.64,1)',
+      position: 'fixed',
+      bottom: '96px',
+      right: '24px',
+      width: '420px',
+      maxHeight: '700px',
+      zIndex: 100,
+      display: 'flex',
+      flexDirection: 'column',
+      borderRadius: '20px',
+      background: '#0d1b2e',
+      border: '1px solid rgba(255,255,255,0.07)',
+      boxShadow: '0 32px 80px rgba(0,0,0,0.6)',
+      overflow: 'hidden',
+      fontFamily: "'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif",
     }}>
+
       {/* HEADER */}
       <div style={{
-        position:'relative', overflow:'hidden',
-        background:'linear-gradient(135deg,#0a1628 0%,#163460 50%,#1a4b8f 100%)',
-        padding:'18px', display:'flex', alignItems:'center', gap:'14px',
-        borderBottom:'1px solid rgba(99,179,255,0.15)',
+        padding: '16px 20px',
+        background: 'linear-gradient(135deg, #0a1628 0%, #0d2047 50%, #0f2d6b 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
+        flexShrink: 0,
       }}>
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent,rgba(99,179,255,0.08),transparent)', animation:'shineMove 4s linear infinite' }} />
-        <div style={{ width:52, height:52, borderRadius:'18px', background:'linear-gradient(135deg,#1d4ed8,#2563eb)', display:'flex', alignItems:'center', justifyContent:'center', boxShadow:'0 8px 24px rgba(37,99,235,0.5)', position:'relative', zIndex:2, flexShrink:0 }}>
-          <BotSVG />
-        </div>
-        <div style={{ flex:1, position:'relative', zIndex:2 }}>
-          <div style={{ fontSize:'16px', fontWeight:800, color:'#fff', fontFamily:"'Syne',sans-serif", letterSpacing:'-0.02em' }}>ScanForSafe AI</div>
-          <div style={{ display:'flex', alignItems:'center', gap:'6px', marginTop:'4px', color:'rgba(147,197,253,0.85)', fontSize:'12px', fontFamily:"'DM Sans',sans-serif" }}>
-            <span style={{ width:8, height:8, borderRadius:'50%', background:'#4ade80', animation:'pulseDot 1.8s infinite', display:'inline-block' }} />
-            Online · Powered by AI
+        <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
+          {/* Bot Avatar */}
+          <div style={{
+            width: '52px',
+            height: '52px',
+            borderRadius: '50%',
+            background: 'linear-gradient(135deg, #2563eb, #1e40af)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            border: '2px solid rgba(99,179,255,0.3)',
+            flexShrink: 0,
+          }}>
+            <BotSVG />
+          </div>
+          <div>
+            <div style={{ color: '#fff', fontWeight: 700, fontSize: '17px', letterSpacing: '-0.3px' }}>
+              ScanForSafe AI Assistant
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '3px' }}>
+              <span style={{
+                width: '8px', height: '8px', borderRadius: '50%',
+                background: '#22c55e', display: 'inline-block',
+                boxShadow: '0 0 6px #22c55e',
+              }}/>
+              <span style={{ fontSize: '12px', color: '#60a5fa', fontWeight: 500 }}>
+                Online • AI Powered
+              </span>
+            </div>
           </div>
         </div>
-        <button onClick={onClose} style={{ width:34, height:34, borderRadius:'50%', border:'1px solid rgba(255,255,255,0.12)', background:'rgba(255,255,255,0.07)', display:'flex', alignItems:'center', justifyContent:'center', cursor:'pointer', position:'relative', zIndex:2, transition:'all 0.2s' }}>
-          <XSvg size={18} />
+        <button
+          onClick={onClose}
+          style={{
+            width: '34px', height: '34px', borderRadius: '50%',
+            border: '1px solid rgba(255,255,255,0.15)',
+            background: 'rgba(255,255,255,0.08)',
+            cursor: 'pointer',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            transition: 'background 0.2s',
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = 'rgba(255,255,255,0.15)'}
+          onMouseLeave={e => e.currentTarget.style.background = 'rgba(255,255,255,0.08)'}
+        >
+          <XSvg size={15} />
         </button>
       </div>
 
-      {/* QUICK OPTIONS */}
-      <div style={{ padding:'12px 14px', display:'flex', flexWrap:'wrap', gap:'8px', background:'rgba(255,255,255,0.03)', borderBottom:'1px solid rgba(99,179,255,0.1)' }}>
-        {QUICK_OPTIONS.map((item, idx) => (
-          <button key={idx} onClick={() => sendMessage(item.label)} style={{
-            border:'1px solid rgba(99,179,255,0.2)', cursor:'pointer', padding:'8px 13px', borderRadius:'999px',
-            background:'rgba(255,255,255,0.05)', display:'flex', alignItems:'center', gap:'6px',
-            fontSize:'11.5px', fontWeight:600, color:'#93c5fd', fontFamily:"'DM Sans',sans-serif",
-            transition:'all 0.2s', letterSpacing:'0.01em',
-          }}>
-            <span>{item.icon}</span>{item.label}
-          </button>
-        ))}
-      </div>
-
-      {/* MESSAGES */}
-      <div style={{ flex:1, overflowY:'auto', padding:'16px', display:'flex', flexDirection:'column', gap:'12px', background:'transparent' }}>
-        {messages.map((m, idx) => (
-          <div key={idx} style={{ display:'flex', justifyContent: m.role==='user' ? 'flex-end' : 'flex-start' }}>
+      {/* CHAT BODY */}
+      <div style={{
+        flex: 1,
+        overflowY: 'auto',
+        padding: '20px 16px 12px',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '4px',
+        background: '#0d1b2e',
+        scrollbarWidth: 'thin',
+        scrollbarColor: 'rgba(99,179,255,0.2) transparent',
+      }}>
+        {messages.map((msg, index) => (
+          <div key={index}>
             <div style={{
-              maxWidth:'84%', padding:'12px 15px',
-              borderRadius: m.role==='user' ? '20px 20px 6px 20px' : '20px 20px 20px 6px',
-              background: m.role==='user' ? 'linear-gradient(135deg,#1d4ed8,#2563eb)' : 'rgba(255,255,255,0.07)',
-              color: m.role==='user' ? '#fff' : '#e2e8f0',
-              fontSize:'13px', lineHeight:1.7, fontFamily:"'DM Sans',sans-serif",
-              boxShadow: m.role==='user' ? '0 8px 24px rgba(37,99,235,0.3)' : 'none',
-              border: m.role==='assistant' ? '1px solid rgba(99,179,255,0.15)' : 'none',
-              whiteSpace:'pre-line',
-            }}>{m.content}</div>
+              display: 'flex',
+              justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
+              alignItems: 'flex-end',
+              gap: '10px',
+              marginBottom: '2px',
+            }}>
+              {/* Bot Avatar in chat */}
+              {msg.role === 'assistant' && (
+                <div style={{
+                  width: '36px', height: '36px', borderRadius: '50%',
+                  background: 'linear-gradient(135deg, #2563eb, #1e40af)',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  flexShrink: 0, alignSelf: 'flex-end', marginBottom: '18px',
+                }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <rect x="2" y="7" width="20" height="14" rx="3" stroke="white" strokeWidth="1.8"/>
+                    <circle cx="8.5" cy="14" r="1.5" fill="white"/>
+                    <circle cx="15.5" cy="14" r="1.5" fill="white"/>
+                    <path d="M8 18h8" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M12 7V4" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                    <circle cx="12" cy="3" r="1.2" fill="white"/>
+                  </svg>
+                </div>
+              )}
+
+              <div style={{ maxWidth: '75%', display: 'flex', flexDirection: 'column', alignItems: msg.role === 'user' ? 'flex-end' : 'flex-start' }}>
+                <div style={{
+                  padding: '13px 16px',
+                  borderRadius: msg.role === 'user' ? '18px 18px 4px 18px' : '18px 18px 18px 4px',
+                  background: msg.role === 'user'
+                    ? 'linear-gradient(135deg, #2563eb, #1d4ed8)'
+                    : 'rgba(255,255,255,0.07)',
+                  border: msg.role === 'assistant' ? '1px solid rgba(255,255,255,0.08)' : 'none',
+                  color: '#e2e8f0',
+                  whiteSpace: 'pre-line',
+                  lineHeight: 1.75,
+                  fontSize: '13.5px',
+                  fontWeight: 400,
+                }}>
+                  {msg.role === 'assistant' && index === messages.length - 1 && !loading ? (
+                    <TypingMessage text={msg.content} />
+                  ) : (
+                    msg.content
+                  )}
+                </div>
+                {/* Timestamp */}
+                <div style={{
+                  fontSize: '11px',
+                  color: 'rgba(148,163,184,0.6)',
+                  marginTop: '5px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                }}>
+                  {msg.time}
+                  {msg.role === 'user' && (
+                    <svg width="14" height="10" viewBox="0 0 18 12" fill="none">
+                      <path d="M1 6l4 4L17 1" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M7 6l4 4" stroke="#60a5fa" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         ))}
+
+        {/* LOADING DOTS */}
         {loading && (
-          <div style={{ display:'flex' }}>
-            <div style={{ background:'rgba(255,255,255,0.07)', padding:'12px 14px', borderRadius:'18px', display:'flex', gap:'6px', border:'1px solid rgba(99,179,255,0.15)' }}>
-              {[0,1,2].map(d => <span key={d} style={{ width:7, height:7, borderRadius:'50%', background:'#60a5fa', animation:`bounce 1.2s ${d*0.2}s infinite`, display:'inline-block' }} />)}
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: '10px', marginTop: '4px' }}>
+            <div style={{
+              width: '36px', height: '36px', borderRadius: '50%',
+              background: 'linear-gradient(135deg, #2563eb, #1e40af)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0,
+            }}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="7" width="20" height="14" rx="3" stroke="white" strokeWidth="1.8"/>
+                <circle cx="8.5" cy="14" r="1.5" fill="white"/>
+                <circle cx="15.5" cy="14" r="1.5" fill="white"/>
+                <path d="M8 18h8" stroke="white" strokeWidth="1.5" strokeLinecap="round"/>
+                <path d="M12 7V4" stroke="white" strokeWidth="1.8" strokeLinecap="round"/>
+                <circle cx="12" cy="3" r="1.2" fill="white"/>
+              </svg>
+            </div>
+            <div style={{
+              padding: '14px 18px',
+              borderRadius: '18px 18px 18px 4px',
+              background: 'rgba(255,255,255,0.07)',
+              border: '1px solid rgba(255,255,255,0.08)',
+              display: 'flex', gap: '5px', alignItems: 'center',
+            }}>
+              {[0, 1, 2].map(i => (
+                <span key={i} style={{
+                  width: '7px', height: '7px', borderRadius: '50%',
+                  background: '#60a5fa',
+                  animation: `bounce 1.2s infinite ${i * 0.2}s`,
+                  display: 'inline-block',
+                }}/>
+              ))}
             </div>
           </div>
         )}
+
         <div ref={bottomRef} />
       </div>
 
-      {/* INPUT */}
-      <div style={{ padding:'13px', borderTop:'1px solid rgba(99,179,255,0.1)', background:'rgba(255,255,255,0.02)', display:'flex', gap:'10px' }}>
+      {/* QUICK TOPICS */}
+      <div style={{
+        padding: '14px 16px 10px',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        background: '#0d1b2e',
+        flexShrink: 0,
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '10px' }}>
+          <SparklesSVG />
+          <span style={{ fontSize: '12.5px', fontWeight: 600, color: '#94a3b8' }}>Quick Topics</span>
+        </div>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
+          {QUICK_TOPICS.map(({ label, Icon }, i) => (
+            <button
+              key={i}
+              onClick={() => sendMessage(label)}
+              style={{
+                display: 'flex', alignItems: 'center', gap: '6px',
+                padding: '7px 13px',
+                borderRadius: '999px',
+                border: '1px solid rgba(99,179,255,0.2)',
+                background: 'rgba(255,255,255,0.04)',
+                color: '#cbd5e1',
+                cursor: 'pointer',
+                fontSize: '12px',
+                fontWeight: 500,
+                transition: 'all 0.2s',
+                fontFamily: 'inherit',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(37,99,235,0.2)'
+                e.currentTarget.style.borderColor = 'rgba(99,179,255,0.4)'
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
+                e.currentTarget.style.borderColor = 'rgba(99,179,255,0.2)'
+              }}
+            >
+              <Icon />
+              {label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* INPUT BAR */}
+      <div style={{
+        padding: '12px 14px 14px',
+        background: '#0d1b2e',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '10px',
+        flexShrink: 0,
+      }}>
+        <button style={{
+          width: '38px', height: '38px',
+          borderRadius: '50%',
+          border: 'none',
+          background: 'transparent',
+          cursor: 'pointer',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          flexShrink: 0,
+        }}>
+          <ClipSVG />
+        </button>
+
         <input
           value={input}
           onChange={e => setInput(e.target.value)}
-          onKeyDown={e => e.key==='Enter' && sendMessage()}
-          placeholder="Type your message..."
+          onKeyDown={e => e.key === 'Enter' && sendMessage()}
+          placeholder="Ask anything about ScanForSafe..."
           style={{
-            flex:1, borderRadius:'999px', border:'1.5px solid rgba(99,179,255,0.2)',
-            padding:'11px 16px', fontSize:'13px', outline:'none',
-            background:'rgba(255,255,255,0.06)', color:'#e2e8f0', fontFamily:"'DM Sans',sans-serif",
+            flex: 1,
+            background: 'transparent',
+            border: 'none',
+            outline: 'none',
+            color: '#e2e8f0',
+            fontSize: '13.5px',
+            fontFamily: 'inherit',
+            padding: '0',
           }}
         />
-        <button onClick={() => sendMessage()} disabled={!input.trim()||loading} style={{
-          width:46, height:46, borderRadius:'50%', border:'none', cursor:'pointer',
-          background: input.trim()&&!loading ? 'linear-gradient(135deg,#2563eb,#1d4ed8)' : 'rgba(255,255,255,0.1)',
-          display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0,
-          boxShadow: input.trim()&&!loading ? '0 8px 24px rgba(37,99,235,0.35)' : 'none', transition:'all 0.2s',
-        }}>
+
+        <button
+          onClick={() => sendMessage()}
+          disabled={!input.trim() || loading}
+          style={{
+            width: '42px', height: '42px',
+            borderRadius: '50%',
+            border: 'none',
+            cursor: input.trim() && !loading ? 'pointer' : 'default',
+            background: input.trim() && !loading
+              ? 'linear-gradient(135deg, #2563eb, #1d4ed8)'
+              : 'rgba(37,99,235,0.4)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            flexShrink: 0,
+            transition: 'all 0.2s',
+            boxShadow: input.trim() && !loading ? '0 4px 14px rgba(37,99,235,0.4)' : 'none',
+          }}
+        >
           {loading ? <LoaderSVG /> : <SendSVG />}
         </button>
       </div>
@@ -194,102 +569,82 @@ function AIChatWindow({ onClose }) {
   )
 }
 
-/* ══ FLOATING CTA ══ */
-export default function FloatingCTA() {
+/* =========================================
+   FLOATING BUTTON
+========================================= */
+
+export default function ScanForSafeChatWidget() {
   const [chatOpen, setChatOpen] = useState(false)
 
   return (
     <>
       <style>{`
-        @keyframes float { 0%,100%{transform:translateY(0px)} 50%{transform:translateY(-6px)} }
-        @keyframes bounce { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
-        @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-        @keyframes pulseDot { 0%{box-shadow:0 0 0 0 rgba(74,222,128,.7)} 70%{box-shadow:0 0 0 10px rgba(74,222,128,0)} 100%{box-shadow:0 0 0 0 rgba(74,222,128,0)} }
-        @keyframes shineMove { 0%{transform:translateX(-120%)} 100%{transform:translateX(120%)} }
-        @keyframes chatPopup { from{opacity:0;transform:scale(.88) translateY(20px)} to{opacity:1;transform:scale(1) translateY(0)} }
-        @keyframes waPulse { 0%,100%{box-shadow:0 14px 32px rgba(37,211,102,.35)} 50%{box-shadow:0 14px 48px rgba(37,211,102,.6)} }
-        @keyframes aiBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes bounce {
+          0%, 80%, 100% { transform: translateY(0); }
+          40% { transform: translateY(-5px); }
+        }
+        @keyframes pulse-ring {
+          0% { transform: scale(1); opacity: 0.6; }
+          100% { transform: scale(1.5); opacity: 0; }
+        }
       `}</style>
 
       {chatOpen && <AIChatWindow onClose={() => setChatOpen(false)} />}
 
-    {/* WHATSAPP BUTTON */}
-<a
-  href="https://whatsapp.com/channel/0029VbCNFw0JP2105GmsoT0H"
-  target="_blank"
-  rel="noreferrer"
-  style={{
-    position: 'fixed',
-    bottom: '100px',
-    right: '24px',
-    zIndex: 50,
-    width: '64px',
-    height: '64px',
-    borderRadius: '50%',
-    background: 'linear-gradient(135deg,#25D366,#128C48)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    animation: 'float 3s ease-in-out infinite',
-    border: '2px solid rgba(255,255,255,0.25)',
-    boxShadow: '0 14px 32px rgba(37,211,102,.4)',
-    overflow: 'hidden',
-    textDecoration: 'none',
-  }}
->
-  {/* shine */}
-  <div
-    style={{
-      position: 'absolute',
-      inset: 0,
-      background:
-        'linear-gradient(90deg,transparent,rgba(255,255,255,0.12),transparent)',
-      animation: 'shineMove 4s linear infinite',
-    }}
-  />
-
-  {/* ORIGINAL WHATSAPP SVG */}
-  <svg
-    width="34"
-    height="34"
-    viewBox="0 0 32 32"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    style={{ position: 'relative', zIndex: 2 }}
-  >
-    <path
-      d="M16 3C8.82 3 3 8.73 3 15.8c0 2.49.73 4.8 1.98 6.76L3 29l6.66-1.91A13.1 13.1 0 0016 28.6c7.18 0 13-5.73 13-12.8C29 8.73 23.18 3 16 3z"
-      fill="white"
-    />
-    <path
-      d="M22.1 18.9c-.34-.17-2-1-2.32-1.1-.31-.12-.54-.17-.77.17-.23.33-.88 1.1-1.08 1.33-.2.23-.4.25-.74.08-.34-.17-1.43-.52-2.72-1.66-1-.9-1.68-2-1.88-2.34-.2-.34-.02-.52.15-.69.15-.15.34-.4.51-.6.17-.2.23-.34.34-.57.11-.23.06-.43-.03-.6-.08-.17-.77-1.84-1.05-2.52-.28-.67-.56-.58-.77-.59h-.65c-.23 0-.6.08-.91.43-.31.34-1.2 1.17-1.2 2.86s1.23 3.32 1.4 3.55c.17.23 2.42 3.67 5.86 5 .82.35 1.47.56 1.97.72.83.26 1.58.22 2.17.13.66-.1 2-.82 2.28-1.62.28-.8.28-1.48.2-1.62-.08-.14-.31-.22-.65-.39z"
-      fill="#25D366"
-    />
-  </svg>
-</a>
-
-      {/* AI CHAT BUTTON */}
-      <button onClick={() => setChatOpen(o => !o)} style={{
-        position:'fixed', bottom:'24px', right:'24px', zIndex:50,
-        height:'64px', borderRadius:'999px', border:'none', cursor:'pointer',
-        background:'linear-gradient(135deg,#1d4ed8,#2563eb,#4f46e5)',
-        display:'flex', alignItems:'center', gap:'12px', padding:'0 22px',
-        boxShadow:'0 16px 40px rgba(37,99,235,.45)',
-        animation:'aiBounce 3s ease-in-out infinite',
-        overflow:'hidden',
-      }}>
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent)', animation:'shineMove 4s linear infinite' }} />
-        <div style={{ width:40, height:40, borderRadius:'50%', background:'rgba(255,255,255,0.15)', display:'flex', alignItems:'center', justifyContent:'center', position:'relative', zIndex:2, flexShrink:0 }}>
-          {chatOpen ? <XSvg size={20} /> : <BotSVG />}
+      {/* FLOATING CTA BUTTON */}
+      <button
+        onClick={() => setChatOpen(!chatOpen)}
+        style={{
+          position: 'fixed',
+          bottom: '24px',
+          right: '24px',
+          zIndex: 50,
+          height: '62px',
+          borderRadius: '999px',
+          border: 'none',
+          cursor: 'pointer',
+          padding: '0 22px 0 8px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          background: 'linear-gradient(135deg, #1d4ed8, #2563eb)',
+          color: '#fff',
+          boxShadow: '0 8px 32px rgba(37,99,235,0.5)',
+          fontFamily: "'Segoe UI', -apple-system, sans-serif",
+          transition: 'transform 0.2s, box-shadow 0.2s',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.transform = 'translateY(-2px)'
+          e.currentTarget.style.boxShadow = '0 12px 40px rgba(37,99,235,0.6)'
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.transform = 'translateY(0)'
+          e.currentTarget.style.boxShadow = '0 8px 32px rgba(37,99,235,0.5)'
+        }}
+      >
+        <div style={{
+          width: '46px', height: '46px', borderRadius: '50%',
+          background: 'rgba(255,255,255,0.15)',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          position: 'relative',
+        }}>
+          {chatOpen ? <XSvg size={18} /> : <BotSVG />}
+          {!chatOpen && (
+            <span style={{
+              position: 'absolute',
+              top: '0px', right: '0px',
+              width: '12px', height: '12px',
+              borderRadius: '50%',
+              background: '#22c55e',
+              border: '2px solid #1d4ed8',
+            }}/>
+          )}
         </div>
-        <div style={{ textAlign:'left', color:'#fff', position:'relative', zIndex:2 }}>
-          <div style={{ fontSize:'14px', fontWeight:800, fontFamily:"'Syne',sans-serif", letterSpacing:'-0.02em' }}>AI Assistant</div>
-          <div style={{ fontSize:'11px', opacity:.8, fontFamily:"'DM Sans',sans-serif", display:'flex', alignItems:'center', gap:'4px' }}>
-            Ask anything
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/></svg>
-          </div>
+        <div style={{ textAlign: 'left' }}>
+          <div style={{ fontWeight: 700, fontSize: '14px', letterSpacing: '-0.2px' }}>AI Assistant</div>
+          <div style={{ fontSize: '11px', opacity: 0.8, marginTop: '1px' }}>Ask anything</div>
         </div>
-        <SparklesSVG />
       </button>
     </>
   )
