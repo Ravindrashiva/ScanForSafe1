@@ -69,8 +69,8 @@ function BenefitCard({ icon, title, description, color, bg, borderColor, index }
         position: 'relative',
         borderRadius: 16,
         border: active
-          ? `2px solid ${color}`
-          : `2px solid ${borderColor}`,
+          ? `1px solid ${color}`
+          : `1px solid ${borderColor}`,
         background:  '#ffffff',
         padding: '22px 20px 28px',
         overflow: 'hidden',

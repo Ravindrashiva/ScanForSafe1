@@ -1,5 +1,5 @@
 import { Heart, Phone, AlertTriangle, Wifi, QrCode, ShieldCheck, User, Droplets, Watch } from 'lucide-react'
-
+import oldman from "/assets/oldman.png";
 export default function SeniorCitizenSection() {
   const mobileSeniorFeatures = [
     { icon: Heart,          color: '#ef4444', bg: '#fef2f2', title: 'Medical Profile',     desc: 'Blood group, conditions, medications & more' },
@@ -193,7 +193,7 @@ export default function SeniorCitizenSection() {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
               <img
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                 src={oldman}
                 alt="Ramesh Nair"
                 style={{ width: 56, height: 56, borderRadius: '50%', objectFit: 'cover', border: '2px solid #2ebd3a' }}
               />
