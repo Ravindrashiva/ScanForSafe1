@@ -648,7 +648,7 @@ function GPSSimulatorWrapper() {
                 <div style={{fontSize:11,fontWeight:800,color:'#ccfbf1'}}>{coords.area}</div>
                 <div style={{fontSize:9,color:'#14b8a6',fontFamily:'monospace',marginTop:2}}>{coords.lat} · {coords.lng}</div>
               </div>
-              <div style={{ background:'rgba(13,148,136,0.08)',borderRadius:12,padding:'10px 12px',border:'1.5px solid rgba(20,184,136,0.2)' }}>
+              <div style={{ background:'rgba(13,148,136,0.08)',borderRadius:12,padding:'10px 12px',border:'1.5px solid rgba(20,148,136,0.2)' }}>
                 {[['⏰ Time', coords.time],['📱 Device', coords.device]].map(([k,v])=>(<div key={k} style={{display:'flex',justifyContent:'space-between',fontSize:9,lineHeight:2}}><span style={{color:'#0d9488'}}>{k}</span><span style={{fontWeight:700,color:'#ccfbf1'}}>{v}</span></div>))}
               </div>
               <div style={{ background:'linear-gradient(135deg,#0d9488,#14b8a6)',borderRadius:10,padding:'8px 12px',textAlign:'center',display:'flex',alignItems:'center',justifyContent:'center',gap:6 }}><Icons.MapPin size={12} color="#fff" /><span style={{fontSize:9.5,fontWeight:800,color:'#fff'}}>Open in Google Maps →</span></div>
@@ -762,8 +762,6 @@ function PrivacySimulatorWrapper() {
   const HIDDEN_ICONS = [Icons.Phone, Icons.MapPin, Icons.Bell, Icons.Shield, Icons.Lock]
 
   const PA = '#06b6d4'
-  const PALight = '#22d3ee'
-  const PADark = '#164e63'
 
   return (
     <div style={{ display:'flex', flexDirection:'column', alignItems:'center' }}>
@@ -1047,10 +1045,9 @@ function FeatureCard({ f, active, onClick }) {
           <IconComp size={20} color={active ? '#fff' : f.accent} />
         </div>
       </div>
-      {/* Title — always bold, dark */}
       <h3 style={{ fontSize: 14.5, fontWeight: 900, margin: '0 0 7px', color: active ? '#fff' : '#0f172a', letterSpacing:'-.025em', lineHeight:1.2, fontFamily:"'Outfit', sans-serif" }}>{f.title}</h3>
-      {/* ✅ CHANGED: description is now light grey (#94a3b8) at normal weight when inactive */}
-      <p style={{ fontSize: 12, lineHeight: 1.7, margin: '0 0 14px', color: active ? 'rgba(255,255,255,0.95)' : '#94a3b8', fontWeight: 400 }}>{f.desc}</p>
+      {/* ✅ CHANGED: description uses rgb(90,100,114) at weight 600 when inactive, matching Image 1 */}
+      <p style={{ fontSize: 12, lineHeight: 1.7, margin: '0 0 14px', color: active ? 'rgba(255,255,255,0.95)' : 'rgb(90,100,114)', fontWeight: active ? 400 : 600 }}>{f.desc}</p>
       <div style={{ display:'flex', flexWrap:'wrap', gap:5, marginBottom:12 }}>
         {f.pills.map(p => <span key={p} style={{ fontSize: 9.5, fontWeight: 700, padding: '3px 9px', borderRadius: 99, background: active ? 'rgba(255,255,255,0.16)' : f.bg, color: active ? '#fff' : f.tagColor, border: `1px solid ${active ? 'rgba(255,255,255,0.25)' : f.tagBg}` }}>{p}</span>)}
       </div>
@@ -1097,8 +1094,8 @@ export default function Features() {
             Powerful Features for{' '}
             <span style={{ background:'linear-gradient(130deg,#16a34a,#059669)', WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text' }}>Peace of Mind</span>
           </h2>
-          {/* ✅ CHANGED: subtitle now light grey, normal weight */}
-          <p style={{ fontSize:15.5, color:'#94a3b8', fontWeight:400, maxWidth:540, margin:'0 auto', lineHeight:1.8 }}>Every feature has a live simulation — click any card, then hit the button to see it in action.</p>
+          {/* ✅ CHANGED: subtitle uses rgb(90,100,114) at weight 600 to match Image 1 */}
+          <p style={{ fontSize:15.5, color:'rgb(90,100,114)', fontWeight:600, maxWidth:540, margin:'0 auto', lineHeight:1.8 }}>Every feature has a live simulation — click any card, then hit the button to see it in action.</p>
           <div style={{ display:'flex', flexWrap:'wrap', justifyContent:'center', gap:8, marginTop:20 }}>
             {FEATURES.map(f => {
               const IconComp = FEATURE_ICONS[f.id]
