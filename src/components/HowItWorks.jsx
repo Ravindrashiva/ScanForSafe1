@@ -21,34 +21,6 @@ const AVATARS = [
   { initials: "SK", bg: "#fff8e1", color: "#633806" },
 ];
 
-function AvatarGroup() {
-  return (
-    <div style={{ display: "flex", alignItems: "center" }}>
-      {AVATARS.map((av, i) => (
-        <div key={i} style={{ width:28, height:28, borderRadius:"50%", background:av.bg, color:av.color, fontSize:8, fontWeight:800, display:"flex", alignItems:"center", justifyContent:"center", border:"2px solid white", marginLeft:i===0?0:-9, zIndex:AVATARS.length-i, position:"relative", flexShrink:0, boxShadow:"0 1px 4px rgba(0,0,0,0.12)" }}>{av.initials}</div>
-      ))}
-      <div style={{ width:28, height:28, borderRadius:"50%", background:"#0B2545", color:"white", fontSize:7, fontWeight:800, display:"flex", alignItems:"center", justifyContent:"center", border:"2px solid white", marginLeft:-9, flexShrink:0, boxShadow:"0 1px 4px rgba(0,0,0,0.12)" }}>+9K</div>
-    </div>
-  );
-}
-
-function IndiaFlag() {
-  return (
-    <svg width="32" height="21" viewBox="0 0 900 600" style={{ borderRadius:3, display:"block" }}>
-      <rect width="900" height="600" fill="#FF9933"/>
-      <rect y="200" width="900" height="200" fill="#fff"/>
-      <rect y="400" width="900" height="200" fill="#138808"/>
-      <circle cx="450" cy="300" r="70" fill="none" stroke="#000080" strokeWidth="7"/>
-      <g stroke="#000080" strokeWidth="2.5">
-        <line x1="450" y1="230" x2="450" y2="370"/><line x1="380" y1="300" x2="520" y2="300"/>
-        <line x1="400.5" y1="249.5" x2="499.5" y2="350.5"/><line x1="499.5" y1="249.5" x2="400.5" y2="350.5"/>
-        <line x1="380" y1="267" x2="520" y2="333"/><line x1="380" y1="333" x2="520" y2="267"/>
-      </g>
-      <circle cx="450" cy="300" r="11" fill="#000080"/>
-    </svg>
-  );
-}
-
 function WhatsAppIcon({ size=22, color="white" }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
@@ -489,7 +461,6 @@ function IPhoneMockup({ targetHeight }) {
 
   return (
     <div style={{ position:"relative", width:PHONE_W, flexShrink:0 }}>
-      {/* Flow labels above phone */}
       <div style={{ position:"absolute", top:-28, left:"50%", transform:"translateX(-50%)", display:"flex", gap:8, whiteSpace:"nowrap" }}>
         <div style={{ fontSize:9, fontWeight:800, color:mode==="call"?BRAND.green:"#bbb", fontFamily:"'Sora',sans-serif", transition:"color 0.3s", letterSpacing:"0.06em", textTransform:"uppercase" }}>📞 Call Flow</div>
         <div style={{ fontSize:9, color:"#ccc" }}>·</div>
@@ -539,7 +510,6 @@ function IPhoneMockup({ targetHeight }) {
           </div>
         </div>
       </div>
-      {/* Page dots below phone */}
       <div style={{ position:"absolute", bottom:-26, left:"50%", transform:"translateX(-50%)", display:"flex", gap:4, alignItems:"center" }}>
         {[1,2,3,4,5,6].map(p=>(<div key={p} onClick={()=>goPage(p)} style={{ width:p===page?14:4, height:4, borderRadius:3, background:mode==="call"&&p===page?BRAND.green:p===page?"#aaa":"#ddd", cursor:"pointer", transition:"all 0.3s ease" }}/>))}
         <div style={{ width:1, height:8, background:"#ccc", margin:"0 2px" }}/>
@@ -606,37 +576,6 @@ function StepCard({ icon:Icon, title, description, badge, badgeIcon:BadgeIcon, t
   );
 }
 
-const STAT_CARDS = [
-  { id:"families", gradient:"linear-gradient(135deg,#0B2545 0%,#1a3a6e 100%)", labelColor:"rgba(255,255,255,0.65)", valueColor:"#ffffff", borderColor:"rgba(74,222,128,0.35)", glowColor:"rgba(74,222,128,0.2)", label:"Happy families", value:"10,000+", flex:"1 1 170px" },
-  { id:"india",    gradient:"linear-gradient(135deg,#FF9933 0%,#e67d22 50%,#138808 100%)", labelColor:"rgba(255,255,255,0.8)", valueColor:"#ffffff", borderColor:"rgba(255,255,255,0.25)", glowColor:"rgba(255,153,51,0.3)", label:"Proudly made in", value:"India", flex:"1 1 130px" },
-  { id:"delivery", gradient:"linear-gradient(135deg,#185fa5 0%,#2563eb 100%)", labelColor:"rgba(255,255,255,0.65)", valueColor:"#ffffff", borderColor:"rgba(147,197,253,0.35)", glowColor:"rgba(37,99,235,0.25)", label:"Delivery across India", value:"3–5 days", flex:"1 1 140px" },
-  { id:"whatsapp", gradient:"linear-gradient(135deg,#128C7E 0%,#25D366 100%)", labelColor:"rgba(255,255,255,0.7)", valueColor:"#ffffff", borderColor:"rgba(255,255,255,0.25)", glowColor:"rgba(37,211,102,0.25)", label:"Instant alerts via", value:"WhatsApp", flex:"1 1 140px" },
-  { id:"security", gradient:"linear-gradient(135deg,#4c1d95 0%,#7c3aed 60%,#a855f7 100%)", labelColor:"rgba(255,255,255,0.65)", valueColor:"#ffffff", borderColor:"rgba(233,213,255,0.3)", glowColor:"rgba(124,58,237,0.25)", label:"Your data security", value:"Bank-grade 256-bit · Zero data selling · GDPR-aligned", isWide:true, flex:"2 1 300px" },
-];
-
-function StatCard({ card }) {
-  const [hovered, setHovered] = useState(false);
-  const iconEl = () => {
-    if(card.id==="families") return <AvatarGroup/>;
-    if(card.id==="india")    return <div style={{ width:40,height:40,borderRadius:10,background:"rgba(255,255,255,0.2)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,border:"1px solid rgba(255,255,255,0.3)" }}><IndiaFlag/></div>;
-    if(card.id==="delivery") return <div style={{ width:40,height:40,borderRadius:10,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,border:"1px solid rgba(255,255,255,0.25)" }}><Truck size={20} color="white"/></div>;
-    if(card.id==="whatsapp") return <div style={{ width:40,height:40,borderRadius:10,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,border:"1px solid rgba(255,255,255,0.25)" }}><WhatsAppIcon size={24}/></div>;
-    if(card.id==="security") return <div style={{ width:40,height:40,borderRadius:10,background:"rgba(255,255,255,0.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,border:"1px solid rgba(255,255,255,0.25)" }}><Lock size={20} color="white"/></div>;
-    return null;
-  };
-  return (
-    <div onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}
-      style={{ flex:card.flex, minWidth:0, background:card.gradient, borderRadius:18, padding:"14px 16px", display:"flex", flexDirection:card.id==="families"?"column":"row", alignItems:card.id==="families"?"flex-start":"center", gap:card.id==="families"?9:12, border:`1px solid ${card.borderColor}`, boxShadow:hovered?`0 16px 48px ${card.glowColor}`:`0 4px 20px ${card.glowColor}`, transform:hovered?"translateY(-4px) scale(1.015)":"none", transition:"all 0.3s cubic-bezier(0.4,0,0.2,1)", position:"relative", overflow:"hidden", cursor:"default" }}>
-      <div style={{ position:"absolute", inset:0, background:"linear-gradient(135deg,rgba(255,255,255,0.12) 0%,transparent 50%)", borderRadius:18, pointerEvents:"none" }}/>
-      {iconEl()}
-      <div style={{ position:"relative", zIndex:1 }}>
-        <p style={{ margin:0, fontSize:9.5, fontWeight:500, color:card.labelColor, letterSpacing:"0.02em", lineHeight:1.3 }}>{card.label}</p>
-        <p style={{ margin:"3px 0 0", fontSize:card.isWide?10.5:13, fontWeight:card.isWide?700:800, color:card.valueColor, lineHeight:1.35, letterSpacing:card.isWide?"0":"-0.3px", fontFamily:"'Sora',sans-serif" }}>{card.value}</p>
-      </div>
-    </div>
-  );
-}
-
 export default function HowItWorks() {
   const [visible, setVisible] = useState(false);
   const cardsColRef = useRef(null);
@@ -670,24 +609,29 @@ export default function HowItWorks() {
   ];
 
   return (
-    <div style={{      paddingTop: "80px",  background:"linear-gradient(160deg,#f8fafc 0%,#fafcfa 50%,#f8fafc 100%)", fontFamily:"'DM Sans',system-ui,sans-serif" }}>
+    <div style={{ paddingTop:"80px", background:"linear-gradient(160deg,#f8fafc 0%,#fafcfa 50%,#f8fafc 100%)", fontFamily:"'DM Sans',system-ui,sans-serif" }}>
       {/* dot grid */}
       <div style={{ position:"fixed", inset:0, pointerEvents:"none", zIndex:0, backgroundImage:"radial-gradient(circle,#7ded88 1px,transparent 1px)", backgroundSize:"28px 28px", opacity:0.35 }}/>
 
       <div style={{ position:"relative", zIndex:1, maxWidth:1200, margin:"0 auto", padding:"48px 24px 44px" }}>
-
-       
 
         {/* two-column */}
         <div className="hiw-row" style={{ display:"flex", alignItems:"stretch", gap:32 }}>
 
           {/* LEFT */}
           <div ref={cardsColRef} className="hiw-left" style={{ flex:"1 1 0", minWidth:0, opacity:visible?1:0, transform:visible?"translateX(0)":"translateX(-24px)", transition:"all 0.6s ease 0.1s" }}>
+
+            {/* ── Updated heading: Image 1 style ── */}
             <h1 style={{ fontSize:"clamp(26px,4vw,44px)", fontWeight:900, color:BRAND.navy, lineHeight:1.12, marginBottom:10, fontFamily:"'Sora',sans-serif", letterSpacing:"-0.03em" }}>
-              Register & Activate in<br/>
-              <span style={{ background:"linear-gradient(125deg,#0a2e10 0%,#2ebd3a 52%,#4bd557 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>3 Easy Steps</span>
+              Protect What Matters<br/>
+              in{" "}<span style={{ background:"linear-gradient(125deg,#0a2e10 0%,#2ebd3a 52%,#4bd557 100%)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", backgroundClip:"text" }}>3 Simple Steps</span>
             </h1>
-            <p style={{ fontSize:13.5, color:"#1a2e22", fontWeight:500, marginBottom:28, lineHeight:1.7, maxWidth:500 }}>No complicated setup. No technical knowledge needed.<br/>Just order, activate, and relax.</p>
+
+            {/* ── Updated subtext: Image 1 style ── */}
+            <p style={{ fontSize:13.5, color:"#1a2e22", fontWeight:500, marginBottom:28, lineHeight:1.7, maxWidth:500 }}>
+              Order your tag, activate it and stay protected.<br/>
+              One scan can <span style={{ color:BRAND.green, fontWeight:700 }}>connect you</span> when it matters most.
+            </p>
 
             <div className="hiw-steps-container" style={{ position:"relative", display:"flex", gap:12, flexWrap:"wrap", alignItems:"stretch" }}>
               <div className="hiw-steps-line" style={{ position:"absolute", top:"30%", left:"calc(33.33% - 8px)", right:"calc(33.33% - 8px)", height:0, borderTop:`2px dashed ${BRAND.borderGreen}`, zIndex:0, pointerEvents:"none" }}/>
@@ -695,24 +639,14 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          {/* ── RIGHT: phone column — FIXED padding ── */}
-          {/* paddingTop reduced from 130 → 40 so phone sits inside the section, not behind the header */}
+          {/* RIGHT: phone column */}
           <div className="hiw-phone" style={{ flex:"0 0 auto", opacity:visible?1:0, transition:"opacity 0.6s ease 0.15s", display:"flex", alignItems:"center", justifyContent:"center", paddingTop:40, paddingBottom:0 }}>
             <IPhoneMockup targetHeight={isMobile ? 460 : cardsHeight}/>
           </div>
         </div>
 
-        {/* stats bar */}
-        <div style={{ marginTop:48, opacity:visible?1:0, transform:visible?"translateY(0)":"translateY(20px)", transition:"all 0.7s ease 0.4s" }}>
-          <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:12 }}>
-            <div style={{ height:2, flex:1, background:"linear-gradient(90deg,transparent,#7ded88 40%,transparent)" }}/>
-            <span style={{ fontSize:9, fontWeight:700, color:"#aaa", letterSpacing:"0.12em", textTransform:"uppercase", fontFamily:"'Sora',sans-serif" }}>Trusted by thousands</span>
-            <div style={{ height:2, flex:1, background:"linear-gradient(90deg,transparent,#7ded88 40%,transparent)" }}/>
-          </div>
-          <div className="hiw-stat-row" style={{ display:"flex", alignItems:"stretch", gap:10, flexWrap:"wrap" }}>
-            {STAT_CARDS.map(card=><StatCard key={card.id} card={card}/>)}
-          </div>
-        </div>
+        {/* Stats bar REMOVED as requested */}
+
       </div>
 
       <style>{`
@@ -747,9 +681,6 @@ export default function HowItWorks() {
           .hiw-step-card div {
             font-size: 12.5px !important;
           }
-          .hiw-stat-row p {
-            font-size: 13.5px !important;
-          }
         }
         @media (max-width: 640px) {
           .hiw-left h1 {
@@ -775,19 +706,6 @@ export default function HowItWorks() {
             flex: none !important;
             width: 100% !important;
             min-width: 0 !important;
-          }
-          .hiw-stat-row {
-            display: grid !important;
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 10px !important;
-          }
-          .hiw-stat-row > div {
-            flex: none !important;
-            width: 100% !important;
-            min-width: 0 !important;
-          }
-          .hiw-stat-row > div:nth-child(5) {
-            grid-column: span 2 !important;
           }
         }
         @media (max-width: 540px) {

@@ -2,11 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const TICKER_ITEMS = [
-  { type: "feature",   icon: "📷",  text: "QR + NFC Enabled" },
-  { type: "feature",   icon: "📵",  text: "No App Required" },
-  { type: "feature",   icon: "💧",  text: "Waterproof Tags" },
-  { type: "feature",   icon: "🚨",  text: "Secure Emergency Access" },
-  { type: "launch",    icon: "🚀",  text: "Pre-launch is now open, and the official launch starts in July." },
+  { type: "feature", icon: "👋", text: "Welcome to ScanForSafe" },
+  { type: "launch",  icon: "🚀", text: "Pre-registration is now open. Our official launch is scheduled for July." },
+  { type: "feature", icon: "🇮🇳", text: "Now Expanding Across India – Franchise Applications Open" },
 ];
 
 export default function Navbar() {
@@ -213,10 +211,6 @@ export default function Navbar() {
           100% { top:88%; opacity:0; }
         }
 
-        /* ══════════════════════════════════════
-           WORDMARK — Merriweather serif font
-           matching exact logo typography
-        ══════════════════════════════════════ */
         .sfs-wordmark {
           display: flex; flex-direction: column;
           justify-content: center; gap: 3px;
@@ -225,8 +219,6 @@ export default function Navbar() {
           display: flex; align-items: center;
           gap: 8px; line-height: 1;
         }
-
-        /* ← Merriweather Bold — matches logo serif style */
         .sfs-wordmark-primary {
           font-family: 'Merriweather', Georgia, serif;
           font-size: 1.55rem;
@@ -235,15 +227,12 @@ export default function Navbar() {
           line-height: 1;
           white-space: nowrap;
         }
-        /* "ScanForSafe" — exact logo green */
         .sfs-wordmark-primary .brand-green {
           background: linear-gradient(135deg, #1e8c1e 0%, #2fb52f 60%, #22a020 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
- 
-        /* Status pill — unchanged */
         .sfs-status {
           display: inline-flex; align-items: center;
           gap: 4px; background: #f0fdf4;
@@ -266,8 +255,6 @@ export default function Navbar() {
           letter-spacing: .16em; text-transform: uppercase;
           color: #15803d;
         }
- 
-        /* ← "Innovations" navy · "Pvt Ltd" green — Merriweather */
         .sfs-wordmark-secondary {
           font-family: 'Merriweather', Georgia, serif;
           font-size: 10.5px;
@@ -279,7 +266,6 @@ export default function Navbar() {
         .sfs-wordmark-secondary .wm-navy  { color: #1a3266; }
         .sfs-wordmark-secondary .wm-green { color: #2a8a1e; }
 
-        /* ── NAV LINKS ── */
         .sfs-links {
           display: flex; align-items: center;
           margin-left: auto; margin-right: 20px;
@@ -300,7 +286,6 @@ export default function Navbar() {
           background:linear-gradient(90deg,#16a34a,#4ade80);
         }
 
-        /* ── ACTIONS ── */
         .sfs-actions { display:flex; align-items:center; gap:10px; }
         .sfs-login {
           height:40px; display:flex; align-items:center;
@@ -332,7 +317,6 @@ export default function Navbar() {
           animation:sfs-blink 1.8s ease-in-out infinite;
         }
 
-        /* ── MOBILE ── */
         .sfs-mobile-btn {
           display:none; width:40px; height:40px;
           border:1px solid rgba(22,163,74,.2);
@@ -348,7 +332,6 @@ export default function Navbar() {
         }
         @media (max-width:480px) { .sfs-status { display:none; } }
 
-        /* ── DRAWER ── */
         .sfs-drawer-overlay {
           position:fixed; inset:0; z-index:100000;
           background:rgba(11,37,69,0); backdrop-filter:blur(0px);
@@ -376,8 +359,6 @@ export default function Navbar() {
         }
         .sfs-drawer-logo { display:flex; align-items:center; gap:8px; }
         .sfs-drawer-logo-img { width:32px; height:32px; object-fit:contain; }
-
-        /* ← Merriweather in drawer brand too */
         .sfs-drawer-brand {
           font-family: 'Merriweather', Georgia, serif;
           font-size: 1rem;
@@ -390,7 +371,6 @@ export default function Navbar() {
           -webkit-text-fill-color: transparent;
           background-clip: text;
         }
-
         .sfs-drawer-close {
           width:36px; height:36px; border-radius:50%;
           background:#f1f5f9; border:1px solid #e2e8f0;
@@ -473,7 +453,6 @@ export default function Navbar() {
 
             <div className="sfs-wordmark">
               <div className="sfs-wordmark-row1">
-                {/* "ScanForSafe" — Merriweather Bold, green */}
                 <div className="sfs-wordmark-primary">
                   <span className="brand-green">ScanForSafe</span>
                 </div>
@@ -482,8 +461,6 @@ export default function Navbar() {
                   <span className="sfs-status-label">Smart Shield</span>
                 </div>
               </div>
-
-              {/* "Innovations" navy · "Pvt Ltd" green — Merriweather */}
               <div className="sfs-wordmark-secondary">
                 <span className="wm-navy">Innovations</span>
                 {" "}

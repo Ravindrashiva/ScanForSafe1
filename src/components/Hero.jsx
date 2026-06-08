@@ -148,7 +148,6 @@ const css = `
     linear-gradient(160deg, #f5f9f5 0%, #f5f9f5 40%, #f0fdf2 100%);
 }
 
-/* ── DESKTOP GRID ── */
 .sfs-grid {
   flex: 1; max-width: 1440px; width: 100%; margin: 0 auto;
   display: grid; grid-template-columns: 46% 54%;
@@ -157,7 +156,6 @@ const css = `
   position: relative; z-index: 2;
 }
 
-/* ── LEFT ── */
 .sfs-left {
   padding-right: 40px;
   display: flex; flex-direction: column; justify-content: center;
@@ -199,16 +197,20 @@ const css = `
   -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
 
-/* ── UPDATED: subtitle text — darkened from grey (#4b6357) to dark green-black ── */
 .sfs-sub {
   font-size: 14.5px; line-height: 1.75; color: #1a2e22;
   max-width: 460px; margin-bottom: 24px; font-weight: 400;
   animation: slideInLeft .85s .14s cubic-bezier(.22,1,.36,1) both;
 }
 
-.sfs-feats { display: flex; gap: 9px; margin-bottom: 24px; }
+/* ── 4-CARD GRID ── */
+.sfs-feats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 9px; margin-bottom: 24px;
+}
 .sfs-feat {
-  flex: 1; background: var(--card-bg);
+  background: var(--card-bg);
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(46,189,58,0.14); border-radius: 18px; padding: 16px 12px 14px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.04), 0 0 0 1px rgba(255,255,255,0.7) inset;
@@ -229,18 +231,32 @@ const css = `
   box-shadow: 0 4px 12px rgba(46,189,58,0.15); border: 1px solid rgba(46,189,58,0.16); flex-shrink: 0;
 }
 .sfs-feat:hover .sfs-feat-ico { transform: scale(1.12) rotate(-5deg); }
-
-/* ── UPDATED: feature card title — bolder weight, darker color ── */
 .sfs-feat h4 { font-size: 12.5px; font-weight: 800; color: #06160A; margin-bottom: 4px; }
-
-/* ── UPDATED: feature card description — darker color, medium weight ── */
 .sfs-feat p  { font-size: 10.5px; line-height: 1.5; color: #2d4a38; font-weight: 500; }
 
 .sfs-feat:nth-child(1) { animation: fadeUp .55s .25s both; }
 .sfs-feat:nth-child(2) { animation: fadeUp .55s .36s both; }
 .sfs-feat:nth-child(3) { animation: fadeUp .55s .47s both; }
+.sfs-feat:nth-child(4) { animation: fadeUp .55s .58s both; }
 
-.sfs-hero-actions { display: flex; align-items: center; gap: 12px; animation: fadeUp .55s .56s both; }
+/* ── TAGLINE ROW ── */
+.sfs-tagline-row {
+  display: flex; align-items: center; gap: 20px;
+  margin-top: 16px; flex-wrap: wrap;
+}
+.sfs-tagline-item {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; color: #2d4a38;
+}
+.sfs-tagline-sep {
+  width: 1px; height: 14px; background: rgba(46,189,58,0.25);
+}
+.sfs-tagline-bold {
+  font-size: 13px; font-weight: 800; color: var(--green);
+  margin-top: 6px; width: 100%;
+}
+
+.sfs-hero-actions { display: flex; align-items: center; gap: 12px; animation: fadeUp .55s .66s both; margin-bottom: 8px; }
 .sfs-btn-main {
   border: none;
   background: linear-gradient(135deg, #1fa82a 0%, #2ebd3a 50%, #0B2545 100%);
@@ -471,7 +487,6 @@ const css = `
 @keyframes slideInLeft{from{opacity:0;transform:translateX(-32px);}to{opacity:1;transform:none;}}
 @keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:none;}}
 
-/* ── VIDEO MODAL ── */
 body.sfs-modal-open{overflow:hidden;}
 .sfs-video-overlay {
   position:fixed;inset:0;z-index:99999;
@@ -520,15 +535,13 @@ body.sfs-modal-open{overflow:hidden;}
 .sfs-vm-video{width:100%;display:block;max-height:76vh;object-fit:contain;background:#000;vertical-align:bottom;border:none;outline:none;}
 .sfs-vm-hint{padding:10px 4px 0;text-align:right;font-family:'DM Sans',sans-serif;font-size:10px;font-weight:500;color:rgba(255,255,255,0.20);letter-spacing:.04em;}
 
-/* ════════════════════════════════════════
-   TABLET  ≤ 1200px
-════════════════════════════════════════ */
 @media(max-width:1200px){
   .sfs-hero{border-radius:22px;}
   .sfs-grid{grid-template-columns:1fr;padding:36px 32px 32px;gap:28px;}
   .sfs-h1{font-size:48px;letter-spacing:-2.2px;}
   .sfs-right{padding:0;}
   .sfs-img-frame{max-width:480px;}
+  .sfs-feats{grid-template-columns:repeat(2,1fr);}
 }
 
 @media (min-width: 641px) and (max-width: 1024px) {
@@ -541,404 +554,156 @@ body.sfs-modal-open{overflow:hidden;}
   .sfs-img-frame { max-width: 520px !important; }
 }
 
-/* ════════════════════════════════════════
-   MOBILE  ≤ 640px
-════════════════════════════════════════ */
 @media(max-width:640px){
-
-  .sfs-hero {
-    border-radius: 20px;
-    border-width: 1px;
-  }
-  .sfs-grid {
-    display: flex;
-    flex-direction: column;
-    padding: 16px 14px;
-    gap: 0;
-  }
-
-  .sfs-left {
-    display: contents;
-  }
-  .sfs-right {
-    display: contents;
-  }
-
-  .sfs-shield-badge {
-    display: none !important;
-  }
-  .sfs-asset-nav {
-    display: none !important;
-  }
-  .sfs-frame-status {
-    display: none !important;
-  }
+  .sfs-hero { border-radius: 20px; border-width: 1px; }
+  .sfs-grid { display: flex; flex-direction: column; padding: 16px 14px; gap: 0; }
+  .sfs-left { display: contents; }
+  .sfs-right { display: contents; }
+  .sfs-shield-badge { display: none !important; }
+  .sfs-asset-nav { display: none !important; }
+  .sfs-frame-status { display: none !important; }
 
   .sfs-badge {
-    order: 1;
-    margin-bottom: 10px;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 6px 12px;
-    border-radius: 9999px;
-    background: #ffffff !important;
-    border: 1px solid rgba(46,189,58,0.2) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    color: #16a34a !important;
-    letter-spacing: 0.05em;
-    width: fit-content;
-    align-self: flex-start;
+    order: 1; margin-bottom: 10px; font-size: 10px; font-weight: 700;
+    padding: 6px 12px; border-radius: 9999px;
+    background: #ffffff !important; border: 1px solid rgba(46,189,58,0.2) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03); color: #16a34a !important;
+    letter-spacing: 0.05em; width: fit-content; align-self: flex-start;
   }
-  .sfs-badge-dot {
-    background: #16a34a;
-    width: 6px;
-    height: 6px;
-  }
-  .sfs-badge-sep {
-    background: rgba(46,189,58,0.2);
-    width: 1px;
-    height: 12px;
-  }
-  .sfs-badge-count {
-    color: #16a34a !important;
-  }
+  .sfs-badge-dot { background: #16a34a; width: 6px; height: 6px; }
+  .sfs-badge-sep { background: rgba(46,189,58,0.2); width: 1px; height: 12px; }
+  .sfs-badge-count { color: #16a34a !important; }
 
   .sfs-h1 {
-    order: 2;
-    font-size: 30px;
-    line-height: 1.05;
-    letter-spacing: -1.4px;
-    margin-bottom: 10px;
-    font-weight: 900;
-    color: #06160A;
+    order: 2; font-size: 30px; line-height: 1.05; letter-spacing: -1.4px;
+    margin-bottom: 10px; font-weight: 900; color: #06160A;
   }
   .sfs-h1 .green {
-    background: none;
-    -webkit-background-clip: unset;
-    -webkit-text-fill-color: unset;
-    background-clip: unset;
-    color: #16a34a;
+    background: none; -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset; background-clip: unset; color: #16a34a;
   }
-
-  /* ── UPDATED mobile subtitle — darker color ── */
   .sfs-sub {
-    order: 3;
-    font-size: 13.5px;
-    line-height: 1.55;
-    color: #1a2e22;
-    margin-bottom: 12px;
-    max-width: 100%;
+    order: 3; font-size: 13.5px; line-height: 1.55;
+    color: #1a2e22; margin-bottom: 12px; max-width: 100%;
   }
 
   .sfs-alert-float {
-    order: 1;
-    position: relative;
-    inset: auto;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    background: #ffffff !important;
-    border: 1px solid rgba(0,0,0,0.05) !important;
-    border-radius: 14px;
-    padding: 10px 14px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
-    width: fit-content;
-    margin: 0 0 12px 0;
-    align-self: flex-start;
-    animation: fadeUp 0.6s ease both;
+    order: 1; position: relative; inset: auto;
+    display: flex; align-items: center; gap: 12px;
+    background: #ffffff !important; border: 1px solid rgba(0,0,0,0.05) !important;
+    border-radius: 14px; padding: 10px 14px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.04);
+    width: fit-content; margin: 0 0 12px 0;
+    align-self: flex-start; animation: fadeUp 0.6s ease both;
   }
   .sfs-alert-ico {
-    width: 32px;
-    height: 32px;
-    border-radius: 8px;
-    background: #fffbeb !important;
-    border: 1px solid #fef3c7 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    flex-shrink: 0;
-    box-shadow: none;
+    width: 32px; height: 32px; border-radius: 8px;
+    background: #fffbeb !important; border: 1px solid #fef3c7 !important;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0; box-shadow: none;
   }
-  .sfs-alert-h {
-    font-size: 12px;
-    font-weight: 800;
-    color: #06160A;
-  }
-  .sfs-alert-p {
-    font-size: 10px;
-    color: #6a8070;
-    margin-top: 1px;
-  }
+  .sfs-alert-h { font-size: 12px; font-weight: 800; color: #06160A; }
+  .sfs-alert-p { font-size: 10px; color: #6a8070; margin-top: 1px; }
 
   .sfs-stage {
-    order: 4;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    position: relative;
-    margin-bottom: 16px;
+    order: 4; display: flex; flex-direction: column;
+    align-items: stretch; width: 100%; position: relative; margin-bottom: 16px;
   }
-
-  .sfs-img-frame {
-    order: 2;
-    max-width: 100%;
-    border-radius: 18px;
-    padding: 4px;
-    box-shadow: 0 8px 32px rgba(46,189,58,0.15);
-  }
-  .sfs-img-frame-inner {
-    border-radius: 14px;
-  }
-  .sfs-asset-img {
-    aspect-ratio: 16/10;
-    max-height: 220px;
-    object-fit: cover;
-    border-radius: 14px;
-  }
+  .sfs-img-frame { order: 2; max-width: 100%; border-radius: 18px; padding: 4px; box-shadow: 0 8px 32px rgba(46,189,58,0.15); }
+  .sfs-img-frame-inner { border-radius: 14px; }
+  .sfs-asset-img { aspect-ratio: 16/10; max-height: 220px; object-fit: cover; border-radius: 14px; }
 
   .sfs-asset-label {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    top: auto;
-    background: rgba(6, 22, 10, 0.85) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(46,189,58,0.4) !important;
-    border-radius: 12px;
-    padding: 8px 12px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    z-index: 12;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    position: absolute; bottom: 12px; left: 12px; top: auto;
+    background: rgba(6,22,10,0.85) !important; backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(46,189,58,0.4) !important;
+    border-radius: 12px; padding: 8px 12px; display: flex; align-items: center;
+    gap: 8px; z-index: 12; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
     animation: pillFloat 6s ease-in-out infinite .4s;
   }
   .sfs-alabel-dot {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-    background: #16a34a !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    animation: none;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: #16a34a !important; display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; animation: none;
   }
-  .sfs-alabel-dot::after {
-    content: "✓";
-    color: white;
-    font-size: 11px;
-    font-weight: 900;
-    line-height: 1;
-  }
-  .sfs-alabel-text {
-    font-size: 11px;
-    font-weight: 700;
-    color: #ffffff !important;
-  }
-  .sfs-alabel-sub {
-    font-size: 9px;
-    color: rgba(255,255,255,0.7) !important;
-  }
+  .sfs-alabel-dot::after { content: "✓"; color: white; font-size: 11px; font-weight: 900; line-height: 1; }
+  .sfs-alabel-text { font-size: 11px; font-weight: 700; color: #ffffff !important; }
+  .sfs-alabel-sub { font-size: 9px; color: rgba(255,255,255,0.7) !important; }
 
   .sfs-qr-float {
-    position: absolute;
-    right: -12px;
-    top: 50%;
+    position: absolute; right: -12px; top: 50%;
     transform: translateY(-50%) perspective(600px) rotateY(-4deg);
-    background: #ffffff !important;
-    border: 1px solid rgba(46,189,58,0.18) !important;
-    border-radius: 14px;
-    padding: 10px 12px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-    z-index: 12;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    background: #ffffff !important; border: 1px solid rgba(46,189,58,0.18) !important;
+    border-radius: 14px; padding: 10px 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08); z-index: 12;
+    display: flex; align-items: center; gap: 10px;
     animation: qrFloatMobile 5.5s ease-in-out infinite .8s;
   }
   @keyframes qrFloatMobile {
-    0%,100%{transform: translateY(-50%) perspective(600px) rotateY(-4deg) scale(0.95);}
-    50%{transform: translateY(-56%) perspective(600px) rotateY(-6deg) scale(0.95);}
+    0%,100%{transform:translateY(-50%) perspective(600px) rotateY(-4deg) scale(0.95);}
+    50%{transform:translateY(-56%) perspective(600px) rotateY(-6deg) scale(0.95);}
   }
-  .sfs-qr-float-title {
-    font-size: 11px;
-    font-weight: 800;
-    color: #0f172a;
-  }
-  .sfs-qr-float-sub {
-    font-size: 8.5px;
-    color: #6b7280;
-  }
-  .sfs-qr-live {
-    font-size: 8.5px;
-    font-weight: 700;
-    color: #16a34a;
-  }
-  .sfs-qr-live-dot {
-    width: 6px;
-    height: 6px;
-    background: #16a34a;
-  }
+  .sfs-qr-float-title { font-size: 11px; font-weight: 800; color: #0f172a; }
+  .sfs-qr-float-sub { font-size: 8.5px; color: #6b7280; }
+  .sfs-qr-live { font-size: 8.5px; font-weight: 700; color: #16a34a; }
+  .sfs-qr-live-dot { width: 6px; height: 6px; background: #16a34a; }
+  .sfs-ring-1 { width: 280px; height: 280px; }
+  .sfs-ring-2 { display: none; }
 
-  .sfs-ring-1 {
-    width: 280px;
-    height: 280px;
-  }
-  .sfs-ring-2 {
-    display: none;
-  }
-
-  /* ── UPDATED mobile feature cards ── */
   .sfs-feats {
     order: 5;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-    margin-bottom: 16px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px; margin-bottom: 16px;
     width: 100%;
-    padding: 0;
-    margin-left: 0;
-    margin-right: 0;
-    overflow-x: visible;
   }
   .sfs-feat {
-    flex: none;
-    min-width: 0;
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.05);
-    border-radius: 10px;
-    padding: 10px 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: left;
-    transition: none;
+    flex: none; min-width: 0; background: #ffffff;
+    border: 1px solid rgba(0,0,0,0.05); border-radius: 10px; padding: 10px 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02); display: flex;
+    flex-direction: column; align-items: flex-start; text-align: left; transition: none;
   }
-  .sfs-feat:hover {
-    transform: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-  }
-  .sfs-feat-ico {
-    width: 28px;
-    height: 28px;
-    border-radius: 6px;
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: none;
-    border: none;
-  }
-  /* ── UPDATED mobile feature card title — bold + dark ── */
-  .sfs-feat h4 {
-    font-size: 10px;
-    font-weight: 800;
-    color: #06160A;
-    margin-bottom: 2px;
-    line-height: 1.2;
-  }
-  /* ── UPDATED mobile feature card description — darker + medium weight ── */
-  .sfs-feat p {
-    font-size: 8.5px;
-    line-height: 1.25;
-    color: #2d4a38;
-    font-weight: 500;
-  }
+  .sfs-feat:hover { transform: none; box-shadow: 0 4px 12px rgba(0,0,0,0.02); }
+  .sfs-feat-ico { width: 28px; height: 28px; border-radius: 6px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; box-shadow: none; border: none; }
+  .sfs-feat h4 { font-size: 10px; font-weight: 800; color: #06160A; margin-bottom: 2px; line-height: 1.2; }
+  .sfs-feat p { font-size: 8.5px; line-height: 1.25; color: #2d4a38; font-weight: 500; }
+
+  .sfs-tagline-row { order: 6; gap: 12px; margin-top: 8px; margin-bottom: 12px; }
+  .sfs-tagline-item { font-size: 10px; }
+  .sfs-tagline-bold { font-size: 12px; }
 
   .sfs-hero-actions {
-    order: 6;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    width: 100%;
-    margin-top: 4px;
+    order: 7; display: flex; flex-direction: column; gap: 8px; width: 100%; margin-top: 4px;
   }
   .sfs-btn-main {
-    width: 100%;
-    justify-content: center;
-    background: #16a34a !important;
-    color: #ffffff !important;
-    padding: 12px 18px;
-    border-radius: 12px;
-    font-size: 13.5px;
-    font-weight: 700;
-    box-shadow: 0 4px 14px rgba(22, 163, 74, 0.2);
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    transition: none;
+    width: 100%; justify-content: center; background: #16a34a !important;
+    color: #ffffff !important; padding: 12px 18px; border-radius: 12px;
+    font-size: 13.5px; font-weight: 700; box-shadow: 0 4px 14px rgba(22,163,74,0.2);
+    border: none; display: flex; align-items: center; gap: 6px; transition: none;
   }
-  .sfs-btn-main:hover {
-    transform: none;
-    box-shadow: 0 4px 14px rgba(22, 163, 74, 0.2);
-  }
+  .sfs-btn-main:hover { transform: none; box-shadow: 0 4px 14px rgba(22,163,74,0.2); }
   .sfs-btn-sec {
-    width: 100%;
-    justify-content: center;
-    background: #ffffff !important;
-    color: #16a34a !important;
-    border: 1.5px solid rgba(22, 163, 74, 0.2) !important;
-    padding: 11px 18px;
-    border-radius: 12px;
-    font-size: 13.5px;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.02);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: none;
+    width: 100%; justify-content: center; background: #ffffff !important;
+    color: #16a34a !important; border: 1.5px solid rgba(22,163,74,0.2) !important;
+    padding: 11px 18px; border-radius: 12px; font-size: 13.5px; font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.02); display: flex; align-items: center; gap: 8px; transition: none;
   }
-  .sfs-btn-sec:hover {
-    transform: none;
-    border-color: rgba(22, 163, 74, 0.35) !important;
-  }
+  .sfs-btn-sec:hover { transform: none; border-color: rgba(22,163,74,0.35) !important; }
   .sfs-play-ring {
-    width: 24px;
-    height: 24px;
-    background: #16a34a !important;
-    border: none !important;
-    box-shadow: none !important;
-    font-size: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 24px; height: 24px; background: #16a34a !important;
+    border: none !important; box-shadow: none !important; font-size: 7px;
+    display: flex; align-items: center; justify-content: center;
   }
-
-  .sfs-vm-wrap {
-    width: calc(100vw - 16px);
-    padding: 0;
-  }
-  .sfs-vm-player-shell {
-    border-radius: 10px;
-  }
-  .sfs-vm-video {
-    max-height: 52vh;
-  }
+  .sfs-vm-wrap { width: calc(100vw - 16px); padding: 0; }
+  .sfs-vm-player-shell { border-radius: 10px; }
+  .sfs-vm-video { max-height: 52vh; }
 }
 
-/* ════════════════════════════════════════
-   EXTRA SMALL  ≤ 380px
-════════════════════════════════════════ */
 @media(max-width:380px){
-  .sfs-h1 {
-    font-size: 28px;
-    letter-spacing: -1.3px;
-  }
-  .sfs-grid {
-    padding: 16px 12px 20px;
-  }
-  .sfs-feats {
-    gap: 6px;
-  }
-  .sfs-feat {
-    padding: 10px 6px;
-  }
+  .sfs-h1 { font-size: 28px; letter-spacing: -1.3px; }
+  .sfs-grid { padding: 16px 12px 20px; }
+  .sfs-feats { gap: 6px; }
+  .sfs-feat { padding: 10px 6px; }
 }
 `;
 
@@ -1055,31 +820,47 @@ function ShieldBadge() {
   );
 }
 
-function SVGSecureQR() {
+/* ─── FEATURE ICONS from Image 3 ─── */
+function SVGQRNfc() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" fill="#0B2545" stroke="#0B2545" strokeWidth="0.5"/>
-      <path d="M9 12l2 2 4-4" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      <rect x="3" y="3" width="7" height="7" rx="1" stroke="#16a34a" strokeWidth="1.8"/>
+      <rect x="5" y="5" width="3" height="3" fill="#16a34a"/>
+      <rect x="14" y="3" width="7" height="7" rx="1" stroke="#16a34a" strokeWidth="1.8"/>
+      <rect x="16" y="5" width="3" height="3" fill="#16a34a"/>
+      <rect x="3" y="14" width="7" height="7" rx="1" stroke="#16a34a" strokeWidth="1.8"/>
+      <rect x="5" y="16" width="3" height="3" fill="#16a34a"/>
+      <path d="M14 14h2v2h-2z M18 14h2v2h-2z M14 18h2v2h-2z M18 18h2v2h-2z M16 16h2v2h-2z" fill="#16a34a"/>
+      <path d="M19 10c1 1 1.5 2 1.5 3" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round"/>
     </svg>
   );
 }
-function SVGTracking() {
+function SVGOwnerConnection() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <circle cx="12" cy="12" r="2" fill="#0d7a8a"/>
-      <path d="M6.34 6.34a8 8 0 0 0 0 11.32" stroke="#0d7a8a" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M17.66 6.34a8 8 0 0 1 0 11.32" stroke="#0d7a8a" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M9.17 9.17a4 4 0 0 0 0 5.66" stroke="#0d7a8a" strokeWidth="2" strokeLinecap="round"/>
-      <path d="M14.83 9.17a4 4 0 0 1 0 5.66" stroke="#0d7a8a" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="9" cy="7" r="3" stroke="#16a34a" strokeWidth="1.8"/>
+      <circle cx="17" cy="7" r="2" stroke="#16a34a" strokeWidth="1.8"/>
+      <path d="M3 19c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round"/>
+      <path d="M17 13c1.7.4 3 2 3 4" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round"/>
+      <path d="M13 10l2 2-2 2" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
     </svg>
   );
 }
-function SVGEmergency() {
+function SVGEmergencyContact() {
   return (
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-      <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" fill="#c0392b" stroke="#c0392b" strokeWidth="0.5"/>
-      <line x1="12" y1="9" x2="12" y2="13" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-      <circle cx="12" cy="16.5" r="0.8" fill="white"/>
+      <path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#16a34a" strokeWidth="1.8" fill="none"/>
+      <circle cx="15" cy="10" r="1.5" fill="#16a34a"/>
+      <path d="M9 12l2 2 4-4" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+function SVGNoApp() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+      <rect x="7" y="2" width="10" height="18" rx="2" stroke="#16a34a" strokeWidth="1.8"/>
+      <line x1="4" y1="4" x2="20" y2="20" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round"/>
+      <circle cx="12" cy="18" r="1" fill="#16a34a"/>
     </svg>
   );
 }
@@ -1232,11 +1013,18 @@ export default function ScanForSafeHero() {
 
   const c = ASSETS[active];
 
-  // ── UPDATED: "Emergency Access" → "Report Emergency Access" ──
   const features = [
-    { ico:<SVGSecureQR/>,  bg:"linear-gradient(135deg,#e8eef8,#d0dcf0)", border:"rgba(11,37,69,0.18)",   h:"Secure QR & NFC",          p:"Military-grade encrypted ID protection" },
-    { ico:<SVGTracking/>,  bg:"linear-gradient(135deg,#e0f5f7,#c0eaed)", border:"rgba(13,122,138,0.18)", h:"Live Tracking",             p:"Real-time alerts & continuous monitoring" },
-    { ico:<SVGEmergency/>, bg:"linear-gradient(135deg,#fdecea,#f9d0cc)", border:"rgba(192,57,43,0.18)",  h:"Report Emergency Access",   p:"Instant verified owner identification" },
+    { ico: <SVGQRNfc />,           bg: "linear-gradient(135deg,#e8f5e9,#c8e6c9)", border: "rgba(46,189,58,0.18)", h: "QR + NFC Enabled",         p: "Instant access through QR and NFC technology." },
+    { ico: <SVGOwnerConnection />, bg: "linear-gradient(135deg,#e8f5e9,#c8e6c9)", border: "rgba(46,189,58,0.18)", h: "Owner Connection",          p: "Connect with owners through a simple scan." },
+    { ico: <SVGEmergencyContact />,bg: "linear-gradient(135deg,#e8f5e9,#c8e6c9)", border: "rgba(46,189,58,0.18)", h: "Emergency Contact Access",  p: "Notify emergency contacts quickly when needed." },
+    { ico: <SVGNoApp />,           bg: "linear-gradient(135deg,#e8f5e9,#c8e6c9)", border: "rgba(46,189,58,0.18)", h: "No App Required",           p: "Works directly from any smartphone browser." },
+  ];
+
+  const taglineItems = [
+    { icon: "🛡️", text: "One Scan" },
+    { icon: "👥", text: "Connect Instantly" },
+    { icon: "🔒", text: "Stay Protected" },
+    { icon: "❤️", text: "Protect What Matters" },
   ];
 
   return (
@@ -1263,18 +1051,17 @@ export default function ScanForSafeHero() {
               <h1 className="sfs-h1">
                 Smart Protection<br />
                 That <span className="green">Connects</span><br />
-                <span className="green">Your World</span>
+                <span className="green">People</span>
               </h1>
 
               <p className="sfs-sub">
-                Protect vehicles, bikes, luggage, pets and loved ones with next-generation
-                QR + NFC verification. Instant owner alerts and live smart protection — all with a single scan.
+                Protect your vehicles, pets, luggage, loved ones, and valuables with ScanForSafe Smart Shield. Using QR and NFC technology, anyone can quickly connect with the owner, report emergencies, or help return lost items—all with a simple scan.
               </p>
 
               <div className="sfs-feats">
                 {features.map((f, i) => (
                   <div className="sfs-feat" key={i}>
-                    <div className="sfs-feat-ico" style={{background:f.bg, borderColor:f.border}}>{f.ico}</div>
+                    <div className="sfs-feat-ico" style={{ background: f.bg, borderColor: f.border }}>{f.ico}</div>
                     <div><h4>{f.h}</h4><p>{f.p}</p></div>
                   </div>
                 ))}
@@ -1291,6 +1078,18 @@ export default function ScanForSafeHero() {
                   <div className="sfs-play-ring">▶</div>
                   See How It Works
                 </button>
+              </div>
+
+              <div className="sfs-tagline-row">
+                {taglineItems.map((item, i) => (
+                  <>
+                    {i > 0 && <span key={`sep-${i}`} className="sfs-tagline-sep" />}
+                    <span key={item.text} className="sfs-tagline-item">
+                      {item.icon} {item.text}
+                    </span>
+                  </>
+                ))}
+                <div className="sfs-tagline-bold">One Scan. <strong>Big Difference.</strong></div>
               </div>
             </div>
 
