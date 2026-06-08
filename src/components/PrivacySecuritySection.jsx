@@ -1,353 +1,267 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
-export default function PrivacySecuritySection() {
+function useInView(threshold = 0.05) {
+  const ref = useRef(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
+      { threshold }
+    )
+    if (ref.current) obs.observe(ref.current)
+    return () => obs.disconnect()
+  }, [])
+  return [ref, visible]
+}
+
+function Fade({ children, delay = 0, visible }) {
+  return (
+    <div style={{
+      opacity: visible ? 1 : 0,
+      transform: visible ? 'translateY(0)' : 'translateY(20px)',
+      transition: `opacity 0.6s ease ${delay}ms, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${delay}ms`,
+    }}>
+      {children}
+    </div>
+  )
+}
+
+const ShieldCheck = ({ color = '#16a34a', size = 22 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <path d="M12 2L3 6.5v6c0 5 3.5 9.5 9 11 5.5-1.5 9-6 9-11v-6L12 2z" stroke={color} strokeWidth="1.6" strokeLinejoin="round" fill={`${color}18`}/>
+    <path d="M8.5 12l2.5 2.5 5-5" stroke={color} strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+const LockIcon = ({ color = '#f97316', size = 22 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <rect x="5" y="11" width="14" height="11" rx="3" stroke={color} strokeWidth="1.6"/>
+    <path d="M8 11V8a4 4 0 0 1 8 0v3" stroke={color} strokeWidth="1.6" strokeLinecap="round"/>
+    <circle cx="12" cy="16.5" r="1.5" fill={color}/>
+    <line x1="12" y1="18" x2="12" y2="20" stroke={color} strokeWidth="1.5" strokeLinecap="round"/>
+  </svg>
+)
+
+const UserIcon = ({ color = '#2563eb', size = 22 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="8" r="3.5" stroke={color} strokeWidth="1.6"/>
+    <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke={color} strokeWidth="1.6" strokeLinecap="round"/>
+  </svg>
+)
+
+const NoSellIcon = ({ color = '#16a34a', size = 22 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+    <circle cx="12" cy="12" r="9" stroke={color} strokeWidth="1.6"/>
+    <line x1="7" y1="7" x2="17" y2="17" stroke={color} strokeWidth="1.7" strokeLinecap="round"/>
+    <path d="M11 9h1.5a2 2 0 0 1 0 4H11M11 9v6" stroke={color} strokeWidth="1.4" strokeLinecap="round"/>
+  </svg>
+)
+
+const CheckCircle = ({ color }) => (
+  <svg width="17" height="17" viewBox="0 0 17 17" fill="none" style={{ flexShrink: 0 }}>
+    <circle cx="8.5" cy="8.5" r="8" fill={`${color}15`} stroke={color} strokeWidth="1"/>
+    <path d="M5.5 8.8l2.2 2.2 4-4.5" stroke={color} strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+)
+
+export default function PrivacySection() {
+  const [ref, visible] = useInView()
+
   const cards = [
     {
-      title: "256-bit Encryption",
-      desc: "AES military-grade encryption at rest and in transit",
-      color: "#7c3aed",
-      bg: "#f5f3ff",
-      borderColor: "#ddd6fe",
-      svg: (
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="7" y="12" width="14" height="11" rx="2" stroke="#7c3aed" strokeWidth="1.5" fill="none"/>
-          <path d="M10 12V9a4 4 0 0 1 8 0v3" stroke="#7c3aed" strokeWidth="1.5" strokeLinecap="round"/>
-          <circle cx="14" cy="17.5" r="1.5" fill="#7c3aed"/>
-          <line x1="14" y1="19" x2="14" y2="21" stroke="#7c3aed" strokeWidth="1.5" strokeLinecap="round"/>
-        </svg>
-      ),
+      icon: <ShieldCheck color="#16a34a" size={24} />,
+      title: 'Privacy Protected',
+      desc: 'Your information is securely stored and shared only when needed.',
+      color: '#16a34a',
+      bg: '#f0fdf4',
+      border: '#bbf7d0',
     },
     {
-      title: "Emergency-Only Access",
-      desc: "Data surfaced strictly when a genuine emergency is detected",
-      color: "#f97316",
-      bg: "#fff7ed",
-      borderColor: "#fed7aa",
-      svg: (
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M14 4L5 22h18L14 4z" stroke="#f97316" strokeWidth="1.5" strokeLinejoin="round" fill="none"/>
-          <line x1="14" y1="12" x2="14" y2="17" stroke="#f97316" strokeWidth="1.5" strokeLinecap="round"/>
-          <circle cx="14" cy="19.5" r="0.75" fill="#f97316"/>
-        </svg>
-      ),
+      icon: <LockIcon color="#f97316" size={24} />,
+      title: 'Controlled Access',
+      desc: 'Information is available only according to the permissions you choose.',
+      color: '#f97316',
+      bg: '#fff7ed',
+      border: '#fed7aa',
     },
     {
-      title: "User Controlled",
-      desc: "You decide exactly which data is visible and to whom",
-      color: "#0891b2",
-      bg: "#ecfeff",
-      borderColor: "#bae6fd",
-      svg: (
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="14" cy="10" r="4" stroke="#0891b2" strokeWidth="1.5" fill="none"/>
-          <path d="M6 22c0-4.418 3.582-8 8-8s8 3.582 8 8" stroke="#0891b2" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
-          <circle cx="20" cy="10" r="2" fill="#0891b2" opacity="0.35"/>
-          <path d="M22 8l1.5-1.5M22 12l1.5 1.5M24 10h2" stroke="#0891b2" strokeWidth="1.2" strokeLinecap="round"/>
-        </svg>
-      ),
+      icon: <UserIcon color="#2563eb" size={24} />,
+      title: 'User Managed',
+      desc: 'You decide what information is visible and can update it anytime.',
+      color: '#2563eb',
+      bg: '#eff6ff',
+      border: '#bfdbfe',
     },
     {
-      title: "Zero Data Selling",
-      desc: "Your information is never shared with or sold to third parties",
-      color: "#16a34a",
-      bg: "#e8f8eb",
-      borderColor: "#bbf7d0",
-      svg: (
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-          <circle cx="10" cy="10" r="3.5" stroke="#16a34a" strokeWidth="1.5"/>
-          <path d="M4.5 20c0-3 2.5-5.5 5.5-5.5S15.5 17 15.5 20" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round"/>
-          <path d="M20 12l4 2v3c0 2.2-1.6 4.2-4 5-2.4-.8-4-2.8-4-5v-3l4-2z" stroke="#16a34a" strokeWidth="1.5" strokeLinejoin="round"/>
-        </svg>
-      ),
+      icon: <NoSellIcon color="#16a34a" size={24} />,
+      title: 'No Data Selling',
+      desc: 'Your information is never sold or shared with third parties.',
+      color: '#16a34a',
+      bg: '#f0fdf4',
+      border: '#bbf7d0',
     },
-  ];
+  ]
 
   const checks = [
-    "Encrypted storage — data never exposed publicly",
-    "Emergency-only access when actually needed",
-    "You control what information is visible",
-    "No data sold to third parties",
-  ];
+    'Owner details remain protected',
+    'You control what information is shared',
+    'No data sold to third parties',
+    'QR & NFC access without revealing personal details publicly',
+  ]
+
+  const categories = [
+    { label: 'Vehicles', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="2" y="9" width="20" height="9" rx="3" stroke="#16a34a" strokeWidth="1.5"/><rect x="6" y="5" width="12" height="7" rx="2" stroke="#16a34a" strokeWidth="1.5"/><circle cx="6.5" cy="18" r="2" stroke="#16a34a" strokeWidth="1.5"/><circle cx="17.5" cy="18" r="2" stroke="#16a34a" strokeWidth="1.5"/></svg> },
+    { label: 'Pets', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><ellipse cx="12" cy="14" rx="5" ry="4" stroke="#16a34a" strokeWidth="1.5"/><circle cx="5" cy="8" r="2" stroke="#16a34a" strokeWidth="1.5"/><circle cx="19" cy="8" r="2" stroke="#16a34a" strokeWidth="1.5"/><circle cx="8" cy="5" r="2" stroke="#16a34a" strokeWidth="1.5"/><circle cx="16" cy="5" r="2" stroke="#16a34a" strokeWidth="1.5"/></svg> },
+    { label: 'Luggage', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><rect x="5" y="8" width="14" height="12" rx="2" stroke="#16a34a" strokeWidth="1.5"/><path d="M9 8V6a3 3 0 0 1 6 0v2" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round"/><line x1="12" y1="11" x2="12" y2="17" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+    { label: 'Seniors', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3.5" stroke="#16a34a" strokeWidth="1.5"/><path d="M5 21c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+    { label: 'Children', icon: <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7" r="3" stroke="#16a34a" strokeWidth="1.5"/><path d="M6 21v-2a6 6 0 0 1 12 0v2" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round"/></svg> },
+  ]
 
   return (
-    <section
-      style={{
-        width: "100%",
-        background: "linear-gradient(160deg, #ffffff 0%, #ffffff 60%, #ecfdf5 100%)",
-        padding: "40px 24px",
-      }}
-    >
-      {/* Google Font */}
+    <section ref={ref} style={{ background: '#ffffff', padding: '72px 0 56px', fontFamily: "'DM Sans', 'Inter', sans-serif" }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
-
-        .ps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; max-width: 1180px; margin: 0 auto; }
-        .ps-card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Sora:wght@700;800;900&display=swap');
+        .ps-wrap { max-width: 1160px; margin: 0 auto; padding: 0 32px; }
+        .ps-grid { display: grid; grid-template-columns: 42% 1fr; gap: 64px; align-items: start; }
+        .ps-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
         .ps-card {
-          background: #ffffff;
-          border: 1.5px solid var(--ps-border-color);
+          background: #fff;
           border-radius: 20px;
-          padding: 28px 24px;
-          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+          padding: 24px 20px 20px;
+          border: 1.5px solid #f1f5f9;
           position: relative;
           overflow: hidden;
+          transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.2s;
+          cursor: default;
+          box-shadow: 0 2px 12px rgba(15,23,42,0.04);
         }
-        .ps-card::before {
-          content: '';
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, var(--ps-bg-color) 0%, #ffffff 70%);
-          z-index: 0;
+        .ps-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(15,23,42,0.08); border-color: #e2e8f0; }
+        .ps-icon-wrap { width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center; margin-bottom: 16px; }
+        .ps-check { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 12px; }
+        .ps-trust {
+          background: #f8fffe;
+          border: 1.5px solid #d1fae5;
+          border-radius: 20px;
+          padding: 20px 28px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 28px;
+          max-width: 1160px;
+          margin: 28px auto 0;
         }
-          
-        .ps-card:hover {
-          transform: translateY(-6px);
-          border-color: var(--ps-hover-border) !important;
-          box-shadow: 0 15px 35px var(--ps-hover-shadow) !important;
+        .ps-cats { display: flex; align-items: center; gap: 6px; }
+        .ps-cat { display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 0 12px; }
+        .ps-divider { width: 1px; height: 36px; background: #d1fae5; }
+        .ps-cat-icon { width: 40px; height: 40px; border-radius: 50%; background: #dcfce7; display: flex; align-items: center; justify-content: center; }
+        @media (max-width: 880px) {
+          .ps-grid { grid-template-columns: 1fr; gap: 36px; }
+          .ps-trust { flex-direction: column; align-items: flex-start; padding: 20px; margin: 24px 20px 0; }
+          .ps-cats { flex-wrap: wrap; gap: 12px !important; }
+          .ps-divider { display: none; }
         }
-        .ps-card > * { position: relative; z-index: 1; }
-        .ps-icon-wrap {
-          width: 52px; height: 52px;
-          border-radius: 14px;
-          display: flex; align-items: center; justify-content: center;
-          margin-bottom: 18px;
-          box-shadow: 0 2px 6px rgba(0,0,0,0.02);
-        }
-        .ps-check-row {
-          display: flex; align-items: flex-start; gap: 14px; margin-bottom: 18px;
-        }
-
-        .ps-mobile-para { display: none; }
-        .ps-desktop-para { display: block; }
-        .ps-mobile-banner { display: none; }
-
-        @media (max-width: 900px) {
-          .ps-grid { grid-template-columns: 1fr; gap: 32px; }
-          .ps-desktop-para { display: none !important; }
-          .ps-mobile-para { display: block !important; margin-bottom: 24px !important; }
-          .ps-checklist { display: none !important; }
-          .ps-mobile-banner {
-            display: flex !important;
-            margin-top: 20px;
-            background: #f0fdf4;
-            border: 1.5px solid #bbf7d0;
-            border-radius: 14px;
-            padding: 12px 16px;
-            align-items: center;
-            gap: 12px;
-            text-align: left;
-            width: 100%;
-          }
-        }
-
-        @media (min-width: 601px) and (max-width: 1024px) {
-          .ps-card h3 {
-            font-size: 18px !important;
-          }
-          .ps-card p {
-            font-size: 14.5px !important;
-          }
-          .ps-desktop-para, .ps-mobile-para {
-            font-size: 16.5px !important;
-            line-height: 1.75 !important;
-          }
-          .ps-check-row span {
-            font-size: 16.5px !important;
-          }
-        }
-
-        @media (max-width: 560px) {
-          .ps-card-grid {
-            grid-template-columns: repeat(2, 1fr) !important;
-            gap: 10px !important;
-          }
-          .ps-card {
-            padding: 16px 12px !important;
-            border-radius: 14px !important;
-          }
-          .ps-icon-wrap {
-            width: 40px !important;
-            height: 40px !important;
-            border-radius: 10px !important;
-            margin-bottom: 12px !important;
-          }
-          .ps-icon-wrap svg {
-            width: 20px !important;
-            height: 20px !important;
-          }
-          .ps-card h3 {
-            font-size: 14.5px !important;
-            margin-bottom: 4px !important;
-            font-weight: 800 !important;
-          }
-          .ps-card p {
-            font-size: 12.5px !important;
-            line-height: 1.45 !important;
-          }
+        @media (max-width: 500px) {
+          .ps-cards { grid-template-columns: 1fr; }
+          .ps-wrap { padding: 0 20px; }
         }
       `}</style>
 
-      <div className="ps-grid">
-        {/* LEFT */}
-        <div>
-          {/* Badge */}
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 28 }}>
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M8 1.5L2 4v4c0 3.3 2.6 6.4 6 7 3.4-.6 6-3.7 6-7V4L8 1.5z" stroke="#15803d" strokeWidth="1.3" fill="none" strokeLinejoin="round"/>
-              <path d="M5.5 8l2 2 3-3" stroke="#15803d" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span style={{ fontFamily: "'Sora', sans-serif", fontSize: 11, fontWeight: 700, color: "#15803d", letterSpacing: "0.08em", textTransform: "uppercase" }}>
-              Privacy &amp; Security
-            </span>
-          </div>
-
-          {/* Heading */}
-          <h2 style={{
-            fontFamily: "'Sora', sans-serif", 
-            fontSize: "clamp(26px, 4.5vw, 36px)",
-            fontWeight: 800,
-            lineHeight: 1.1,
-            color: "#0B2545",
-            marginBottom: 24,
-            letterSpacing: "-0.03em",
-          }}>
-            Your Data Is Always<br />
-            <span style={{ color: "#16a34a", fontWeight: 800 }}>In Your Control</span>
-          </h2>
-
-          {/* Body - Desktop */}
-          <p className="ps-desktop-para" style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: 16,
-            lineHeight: 1.8,
-            color: "#374151",
-            marginBottom: 40,
-            maxWidth: 460,
-            fontWeight: 500,
-          }}>
-            We handle sensitive personal and medical information
-            with the highest level of care. Your family's safety
-            data is protected with enterprise-grade security built
-            for the most demanding environments.
-          </p>
-
-          {/* Body - Mobile */}
-          <p className="ps-mobile-para" style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: 14,
-            lineHeight: 1.7,
-            color: "#374151",
-            fontWeight: 500,
-            maxWidth: 460,
-            margin: 0
-          }}>
-            We handle sensitive personal and medical information with the highest level of care.
-          </p>
-
-          {/* Checklist */}
-          <div className="ps-checklist">
-            {checks.map((item, i) => (
-              <div key={i} className="ps-check-row">
-                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: 2 }}>
-                  <circle cx="11" cy="11" r="10.25" stroke="#16a34a" strokeWidth="1.5" fill="#f0fdf4"/>
-                  <path d="M7 11l3 3 5-5" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
-                <span style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: 15,
-                  color: "#1f2937",
-                  lineHeight: 1.6,
-                  fontWeight: 500,
-                }}>
-                  {item}
+      <div className="ps-wrap">
+        <div className="ps-grid">
+          {/* LEFT */}
+          <div>
+            <Fade visible={visible} delay={0}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 7, marginBottom: 22, padding: '5px 13px', borderRadius: 100, background: '#f0fdf4', border: '1.5px solid #bbf7d0' }}>
+                <ShieldCheck color="#16a34a" size={13} />
+                <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11, fontWeight: 700, color: '#16a34a', letterSpacing: '0.1em', textTransform: 'uppercase' }}>
+                  Privacy & Security
                 </span>
               </div>
-            ))}
-          </div>
-        </div>
+            </Fade>
 
-        {/* RIGHT */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div className="ps-card-grid">
-            {cards.map((card, i) => (
-              <div
-                key={i}
-                className="ps-card"
-                style={{
-                  '--ps-border-color': card.borderColor,
-                  '--ps-bg-color': card.bg,
-                  '--ps-hover-border': card.color,
-                  '--ps-hover-shadow': `rgba(${card.color === '#7c3aed' ? '124,58,237' : card.color === '#f97316' ? '249,115,22' : card.color === '#0891b2' ? '8,145,178' : '22,163,74'}, 0.15)`,
-                }}
-              >
-                {/* Decorative corner accent */}
-                <svg
-                  width="60" height="60"
-                  viewBox="0 0 60 60"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  style={{ position: "absolute", top: 0, right: 0, opacity: 0.2 }}
-                >
-                  <path d="M60 0 Q60 60 0 60" stroke={card.color} strokeWidth="1" fill="none"/>
-                </svg>
+            <Fade visible={visible} delay={80}>
+              <h2 style={{ fontFamily: "'Sora', sans-serif", fontSize: 'clamp(30px,4vw,44px)', fontWeight: 900, lineHeight: 1.08, margin: '0 0 8px', letterSpacing: '-0.03em' }}>
+                <span style={{ color: '#0f172a' }}>Your Information.</span><br />
+                <span style={{ color: '#16a34a' }}>Your Control.</span>
+              </h2>
+            </Fade>
 
-                <div className="ps-icon-wrap" style={{ background: card.bg }}>
-                  {card.svg}
-                </div>
+            <Fade visible={visible} delay={140}>
+              <div style={{ width: 32, height: 3, background: '#16a34a', borderRadius: 2, margin: '16px 0 20px' }} />
+              <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 15, lineHeight: 1.75, color: '#475569', marginBottom: 30, fontWeight: 500, maxWidth: 360 }}>
+                ScanForSafe is designed with privacy first. You decide what information is visible and when it can be accessed.
+              </p>
+            </Fade>
 
-                <h3 style={{
-                  fontFamily: "'Sora', sans-serif",
-                  fontSize: 17,
-                  fontWeight: 800,
-                  color: "#0B2545",
-                  marginBottom: 8,
-                  lineHeight: 1.25,
-                }}>
-                  {card.title}
-                </h3>
-
-                <p style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: 13,
-                  fontWeight: 500,
-                  color: "#374151",
-                  lineHeight: 1.6,
-                  margin: 0,
-                }}>
-                  {card.desc}
-                </p>
-
-                {/* Bottom accent line */}
-                <div style={{
-                  position: "absolute",
-                  bottom: 0, left: 24, right: 24,
-                  height: 2,
-                  background: `linear-gradient(90deg, ${card.color}, transparent)`,
-                  borderRadius: 1,
-                }} />
+            <Fade visible={visible} delay={200}>
+              <div>
+                {checks.map((item, i) => (
+                  <div key={i} className="ps-check">
+                    <CheckCircle color="#16a34a" />
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 14, color: '#1e293b', lineHeight: 1.6, fontWeight: 500 }}>
+                      {item}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </Fade>
           </div>
 
-          {/* Privacy Banner - Mobile Only */}
-          <div className="ps-mobile-banner">
-            <div style={{
-              width: 32, height: 32, borderRadius: '50%', background: '#dcfce7',
-              display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0
-            }}>
-              <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M8 1.5L2 4v4c0 3.3 2.6 6.4 6 7 3.4-.6 6-3.7 6-7V4L8 1.5z" stroke="#16a34a" strokeWidth="1.5" fill="none" strokeLinejoin="round"/>
-                <path d="M5.5 8l2 2 3-3" stroke="#16a34a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <div>
-              <div style={{ fontSize: 12, fontWeight: 700, color: '#14532d', fontFamily: "'Sora', sans-serif" }}>Your privacy, our priority.</div>
-              <div style={{ fontSize: 11, color: '#166534', fontWeight: 500, marginTop: 2, fontFamily: "'DM Sans', sans-serif" }}>Built for trust. Built for life.</div>
-            </div>
+          {/* RIGHT — 2×2 cards */}
+          <div className="ps-cards">
+            {cards.map((card, i) => (
+              <Fade key={i} visible={visible} delay={160 + i * 80}>
+                <div className="ps-card">
+                  <div className="ps-icon-wrap" style={{ background: card.bg, border: `1px solid ${card.border}` }}>
+                    {card.icon}
+                  </div>
+                  <h3 style={{ fontFamily: "'Sora', sans-serif", fontSize: 15.5, fontWeight: 800, color: '#0f172a', marginBottom: 8, lineHeight: 1.2 }}>
+                    {card.title}
+                  </h3>
+                  <p style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, fontWeight: 500, color: '#64748b', lineHeight: 1.65, margin: '0 0 16px' }}>
+                    {card.desc}
+                  </p>
+                  <div style={{ width: 28, height: 2.5, background: card.color, borderRadius: 2 }} />
+                </div>
+              </Fade>
+            ))}
           </div>
         </div>
 
+        {/* TRUST BANNER */}
+        <Fade visible={visible} delay={600}>
+          <div className="ps-trust">
+            <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
+              <div style={{ width: 52, height: 52, borderRadius: '50%', background: '#dcfce7', border: '1.5px solid #bbf7d0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+                  <path d="M13 2L3 6.5v7C3 19.5 7.5 24.5 13 26c5.5-1.5 10-6.5 10-12.5v-7L13 2z" fill="#16a34a" opacity="0.15" stroke="#16a34a" strokeWidth="1.5" strokeLinejoin="round"/>
+                  <path d="M8.5 13l3.5 3.5 6-6" stroke="#16a34a" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </div>
+              <div>
+                <div style={{ fontFamily: "'Sora', sans-serif", fontWeight: 800, fontSize: 15, color: '#14532d', lineHeight: 1.2 }}>
+                  Privacy First. Safety Always.
+                </div>
+                <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, color: '#166534', fontWeight: 500, marginTop: 3, lineHeight: 1.5 }}>
+                  Helping people connect when needed while keeping personal information protected.
+                </div>
+              </div>
+            </div>
+
+            <div className="ps-cats">
+              {categories.map((cat, i) => (
+                <React.Fragment key={cat.label}>
+                  {i > 0 && <div className="ps-divider" />}
+                  <div className="ps-cat">
+                    <div className="ps-cat-icon">{cat.icon}</div>
+                    <span style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 11.5, fontWeight: 600, color: '#166534' }}>{cat.label}</span>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </Fade>
       </div>
     </section>
-  );
+  )
 }
