@@ -18,7 +18,7 @@ const USE_CASES = [
     title: 'Motorcycles & Bikes',
     category: 'VEHICLE',
     qrSize: '3.5 cm QR Sticker',
-    description: 'Smart QR recovery sticker for bikes with instant owner GPS alerts.',
+    description: 'Best anti theft sticker for motorcycles & top bike safety stickers with QR codes.',
     cardBg: '#EAF3DE', accentColor: '#2ebd3a', iconBg: '#27500A', borderColor: '#92cc5a',
     tag: 'QR Sticker', tagBg: '#C0DD97', tagColor: '#27500A',
     titleColor: '#1a3d06', subColor: '#3B6D11', descColor: '#3B6D11',
@@ -52,7 +52,7 @@ const USE_CASES = [
     title: 'Dogs, Cats & Pets',
     category: 'PETS',
     qrSize: 'Collar QR Tag',
-    description: 'Lightweight QR collar tag. Anyone scans → instant owner notification with GPS.',
+    description: 'Top safety tags for pets with best GPS alerts. Light QR tag scans to alert owner.',
     cardBg: '#EAF3DE', accentColor: '#2ebd3a', iconBg: '#27500A', borderColor: '#92cc5a',
     tag: 'Collar Tag', tagBg: '#C0DD97', tagColor: '#27500A',
     titleColor: '#1a3d06', subColor: '#3B6D11', descColor: '#3B6D11',
@@ -69,7 +69,7 @@ const USE_CASES = [
     title: 'Children Safety',
     category: 'SAFETY',
     qrSize: 'Hand Band / Shoulder',
-    description: 'QR wristband for kids. Scan in crowds → parents alerted instantly with live GPS.',
+    description: 'Best emergency contact QR wristbands for kids. Instant notifications & live GPS sharing.',
     cardBg: '#EEEDFE', accentColor: '#534AB7', iconBg: '#3C3489', borderColor: '#9b93e8',
     tag: 'Hand Band', tagBg: '#CECBF6', tagColor: '#26215C',
     titleColor: '#1a1644', subColor: '#534AB7', descColor: '#534AB7',
@@ -383,12 +383,12 @@ export default function UseCases() {
           </div>
 
           <h2 className="uc-header-h2">
-            Protect Everything<br />
-            <span className="uc-green">You Love</span>
+            Best Smart QR Tags<br />
+            <span className="uc-green">For Safety & Protection</span>
           </h2>
 
           <p className="uc-header-p">
-            Smart QR safety tags for bikes, laptops, pets, children, ID cards, and senior citizens.
+            Discover top rated lost and found QR stickers for keys and baggage, best safety tags for pets with GPS alerts, and emergency contact QR wristbands.
           </p>
         </div>
 
